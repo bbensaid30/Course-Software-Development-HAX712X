@@ -1,0 +1,122 @@
+project:
+  type: website
+  render:
+    - index.qmd
+    - Courses/Bash/first_step.qmd
+    - Courses/Bash/handled_files.qmd
+    - Courses/Bash/streams_research.qmd
+    - Courses/Git/Basis_PartI.qmd
+    - Courses/Git/Basis_PartII.qmd
+    - Courses/Git/Collaborative_PartI.qmd
+    - Courses/Git/Collaborative_PartII.qmd
+    - Courses/Git/Errors.qmd
+    - Courses/Git/Workflow.qmd
+    - Courses/Test_Python/Unit_Test.qmd
+    - Courses/Test_Python/TimeMemory.qmd
+    - Courses/Test_Python/Profiling_Debugging.qmd
+    - Courses/Test_Python/CI.qmd
+    - Courses/OPP/modules.qmd
+    - Courses/OPP/Classes_Exceptions.qmd
+    - Courses/OPP/Docs.qmd
+
+website:
+  bread-crumbs: false
+  back-to-top-navigation: true
+  page-navigation: true # true not working in website
+  title: "HAX712X: Software development for data science"
+  #site-url: https://josephsalmon.github.io/HAX712X/
+  #repo-url: https://github.com/josephsalmon/HAX712X
+  #repo-actions: [source, issue]
+  search:
+    location: navbar
+    type: textbox
+  # sidebar:
+  # left:
+  #   contents:
+  #     - section: "Overview"
+  #       contents:
+  #         - href: index.qmd
+  #     - section: "Courses"
+  # contents:
+  #   - href: Courses/Bash/tp.qmd
+  #   - href: Courses/Git/tp.qmd
+  #   - href: Courses/IDE/tp.qmd
+  #   - href: Courses/Venv/tp.qmd
+  #   - href: Courses/CI/tp.qmd
+  #   - href: Courses/Docs/tp.qmd
+  #   - href: Courses/Python-modules/tp.qmd
+  #   - href: Courses/ClassesExceptions/tp.qmd
+  #   - href: Courses/Test/tp.qmd
+  #   - href: Courses/Pandas/tp.qmd
+  #   - href: Courses/Numpy/tp.qmd
+  #   - href: Courses/ScipyNumpy/tp.qmd
+  #   - href: Courses/TimeMemory/tp.qmd
+  # menu: false
+  navbar:
+    title: "Data Science"
+    # background: primary
+    #logo: https://josephsalmon.eu/img/Flag_of_Occitania.svg
+    #favicon: https://josephsalmon.eu/img/Flag_of_Occitania.svg
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - sidebar:general
+      - sidebar:python
+
+  sidebar:
+      - id: general
+        title: "General tools"
+        collapse-level: 3
+        contents:
+          - section: "Bash"
+            contents:
+              - Courses/Bash/first_step.qmd
+              - Courses/Bash/handled_files.qmd
+              - Courses/Bash/streams_research.qmd
+          - section: "Git"
+            contents:
+              - Courses/Git/Basis_PartI.qmd
+              - Courses/Git/Basis_PartII.qmd
+              - Courses/Git/Collaborative_PartI.qmd
+              - Courses/Git/Collaborative_PartII.qmd
+              - Courses/Git/Errors.qmd
+              - Courses/Git/Workflow.qmd
+      - id: python
+        title: "Python Tools"
+        collapse-level: 3
+        contents:
+          - section: "Testing Tools"
+            contents:
+              - Courses/Test_Python/Unit_Test.qmd
+              - Courses/Test_Python/TimeMemory.qmd
+              - Courses/Test_Python/Profiling_Debugging.qmd
+              - Courses/Test_Python/CI.qmd
+          - section: "OOP"
+            contents:
+              - Courses/OPP/modules.qmd
+              - Courses/OPP/Classes_Exceptions.qmd
+              - Courses/OPP/Docs.qmd
+            
+  page-footer:
+    left: |
+      <span class="faux-block">{{< fa brands creative-commons >}} 2025 Bensaid Bilel </span>
+      <span class="faux-block"><a href="https://github.com/josephsalmon/HAX712X">{{< fa brands github >}} Source Code</a></span>
+    # center: |
+    #   <span class="faux-block"><a href="/impressum/index.html">Impressum</a></span>
+    right: |
+      <span class="faux-block"> Built with <a href="https://quarto.org/">Quarto</a></span>
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+
+#execute:
+  #freeze: auto
+
+
+
