@@ -5,5 +5,13 @@ cache
 *.html
 site_libs
 
+.~*
+.ipynb_checkpoints
+.*ipynb
+
+*.pdf
+
+tp_files
+
 
 /.luarc.json
