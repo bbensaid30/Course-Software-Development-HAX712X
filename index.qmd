@@ -1,0 +1,13 @@
+---
+title: "Software Development for Data Science"
+---
+
+In this website, you can find ressources about:
+
+- **Bash** commands 
+- a **Git** tutorial for colloborative code
+- methodology of **Unit Test** and **Continuous Integration**
+- **Oriented Object Programmation** in Python
+- **Data Science** usual libraries in Python (Numpy, Pandas, Scipy)
+
+The **grading project** is also described with the evaluation criteria.
