@@ -1,0 +1,104 @@
+# Basic commands: locally
+
+## Initialization
+A repository is a place where you store the code. 
+```bash
+$ git init --bare ~/reposTest/firstProject.git
+```
+We initialized this repository as we have created a repository on Internet. Later, we will create the repository in Github. 
+But for now, imagine that it is the case. 
+
+## Clone a project
+
+The repository is for now empty. Let's clone an empty project. It is useless but this enables to learn the syntax to do it: in practice, we clone from an Internet adress. The syntax is:
+```bash
+$ git clone repository_adress(remote) localFolder
+```
+In our case:
+```bash
+$ git clone reposTest/firstProject.git firstProject
+```
+
+Let's enter in this folder. Let's type ```git status``` and to check if the repertory has been cloned. 
+If you type ```ls -a``` you can see a folder ".git". It's thanks to it that your folder is a repository and that git follows the modifications. 
+
+## How to follow the different versions of my files ?
+
+Let's first create a file in this folder:
+```bash
+$ echo "Accuracy: 60%" >> basic_model.py
+```
+With ```git status```, we see that git has detected the new file. 
+
+Now, we want to follow the future modifications of this file (future snapshots=commits). 
+```bash
+$ git add basic_model.py
+```
+You can check that the file is followed by git using ```git status```. The command means that you add the file to the git index located in the folder ".git".
+
+## How to untrack your file ?
+In this part, imagine that we have data file (csv) and a script to process it.
+```bash
+$ mkdir data
+$ echo data >> data/housing.csv
+$ touch "pre_process.py"
+```
+You indicate that you track all the files:
+```bash
+$ git add .
+```
+But you do not want to track the csv files (you usually do not follow data files), what can you do to suppress the csv file from the index:
+```bash
+$ git rm --cached data/housing.csv
+```
+
+In fact, you will never track the csv file, so how to tell to git to ignore the folder data forever. To do this you need to create a file ```.gitignore``` and write all the files that you do not want to track in this file. 
+```bash
+$ echo "data/" >> .gitignore
+```
+
+You will want to add this file to your remote repository. But you do not do this immediately since it is preferable to do a commit for the code and another for gitignore. 
+
+## First commit
+In this part, you will do your first commit. You can see a commit as a snapshot of your code. Let's type ```git commit``` with the "-m" option to add a message:
+```bash
+$ git commit -m "first ML model"
+```
+
+<span style="color:red">Exercise (easy)</span>: Add ".gitignore" to the index and commit with an adapted message.
+
+The commits are useful to:
+
+- know the previous states of the code
+- get back to a previous state if one functionality does not work as expected. 
+If your commit message is explicit, it is easier to find a previous commit. 
+
+## Display the recent history of your repo
+
+To display the history of your commit, use:
+```bash
+$ git log 
+```
+The list of commits appears from the newest to oldest. To each commit a hash code (an ID) is associated to precisely identify it. 
+
+## Send your code on a remote repository and recover it
+
+In this part, you have initialized a repository (imagine that it is in Internet) and clone it on your folder. 
+Let's create another folder to pretend to have another computer and clone the faking remote repository:
+```bash
+$ mkdir ../another_computer
+$ cd ../another_computer
+$ git clone ../../reposTest/firstProject.git firstProject
+```
+Now, let's send the last modifications to the faking remote repository with ```git push``` (pousser):
+```bash
+$ cd ../firstProject
+$ git push 
+```
+Return now to your faking computer to recover the last modifications with ```git pull``` (tirer):
+```bash
+$ cd ../another_computer/firstProject
+$ git pull
+```
+
+In the next part, we will work with a real remote repository on Github but without collaborators.

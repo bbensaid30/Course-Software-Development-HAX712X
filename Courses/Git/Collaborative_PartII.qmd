@@ -1,0 +1,72 @@
+# Collaborative Git (PartII)
+
+In this part, you will learn basically how to handle conflicts. 
+
+## Conflict or not ?
+
+Let's imagine you have added some new functionalities to your preprocessing code (branch preprocess_test):
+```bash
+$ echo "one-hot encoding" >> preprocessing_test.py
+```
+Add it to the index and commit it. 
+
+While you have added this preprocess, your colleague has focused on a new method to optimize the model:
+```bash
+$ cd ../colleague_computer
+$ git checkout -b new_opti__model
+```
+He/she changes the script as follows:
+```bash
+$ echo "new opti method: 90% Accuracy" >> first_model.py
+$ git commit -am "new opti method"
+$ git push
+```
+This creates a PR and you accept the merge pull request.
+
+After that, you continue your work on preprocessing:
+```bash
+$ cd ../mycomputer
+$ echo "improve encoding" >> preprocessing_test.py
+$ git commit -am "improve encoding"
+$ git push 
+```
+
+But you do not have the last code of your colleague (you do not have pull the main branch) and you may think that you overwrite his/her file. This is wrong since you require Git to merge the "commits": you have not modified/committed the file "first_model.py". So you can create a PR and merge it. In this situation, **no conflict** exists. Let's explore a conflictual situation where you and your colleague modify the same file. 
+
+## Real Conflict
+
+You come the morning to work and retrieve the last modifications on the main branch (as well as your colleague). Create a new branch and modify "first_model.py". 
+During this time, your colleague modify the file "first_model.py " (a different one): add, commit, push, PR. 
+Validate the modifications of your colleague and finish your own (add, commit, push, PR). After Pull Request, the following message appears: "this branch has conflicts that must be resolved". 
+
+## Handle conflict
+
+### On Github 
+
+Click on resolve conflicts. You will see the modifications brought by your branch and the other changes. Once you have solved the conflicts, click on ```mark as resolved```. 
+
+### Locally
+When you merge the files, Git indicates the presence of a conflict. Three possibilities exist:
+
+- open the file locally and solve the conflict.
+- preserve the local modifications with ```git checkout --ours file```
+- overwrite the local modifications and preserve the remote ones with ```git checkout --theirs file```
+
+## Modification of the historic with ```git rebase```
+You have created a branch "Branch1" but during this time that main branch has been updated (let's say the correction of a major bug). You have two possibilies:
+
+- on the branch "Branch1", you merge the main branch. The drawback of this strategy is to create a complex historic. 
+- with the command ```git rebase``` you overwrite the historic. Let's illustrate this command.
+
+Create a new branch "Branch1" and a new file "branch1_file.txt" and commit it. Return on the main branch, create a new file and commit it. Return on the branch "Branch1" and type:
+```bash
+$ git rebase main
+```
+This indicates that the last commit of main becomes the parent of the branch "Branch1". 
+
+<span style="color:red">Warning: Do not rebase a public branch!</span>
+
+
+
+
+

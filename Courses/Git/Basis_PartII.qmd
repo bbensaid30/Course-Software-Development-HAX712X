@@ -1,0 +1,76 @@
+# Basic commands: remote repo
+
+In this part, we will work on a real remote repository but without collaborators (next part). 
+In this perspective, create an account on [Github](https://github.com/) .
+
+## Create a repository
+Click on "new" or "create repository". You need to fill in the following information:
+
+- provide a repository name and a description
+- you have to choose between public or private (choose private for now)
+- choose to add a "Readme" file (you see what it is)
+- choose to add a "gitignore"
+
+## README
+
+The readme file is used for the documentation of your project. It is often written in markdown. You can find in this file:
+
+- a table of content
+- the goals of the project
+- instruction to install the project (clone is not sufficient and you need for example some python environment and packages)
+- how to use it 
+- a documentation of the different functionalities of your code, ...
+
+## SSH and clone of your repository (important)
+There is nothing on your repository. You want to copy your repository on your computer, code and send your work inline.
+_Remark_: another possibility is to initiate a repository on your computer and send it to Github. But we will proceed more often like described previously.
+
+To clone your repository, click on ```Code``` and then ````SSH```. Github tells you that you do not have a public key. Let's create one.
+
+### Create SSH key
+Click on the link in Code-> SSH or [this one] (https://github.com/settings/ssh/new). 
+We first generate a key using your Github email adress:
+```bash
+$ ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+The terminal suggests to enter the file name where you store the key. By default, it will be in the folder home, in a hidden folder ".ssh" and in the file "id_ed25519". If you have already a ssh key, the terminal tells you so. Github asks you a passphrase: it is not mandatory.
+
+Now, you have generated public and private keys. You will add them to the ssh-agent: it is a program that keeps into memory your keys. You add the previous to this agent:
+```bash
+$ eval "$(ssh-agent -s)"
+$ ssh-add ~/.ssh/id_ed25519 # le chemin vers votre clé privée générée plus haut
+```
+
+To know your ssh key, type:
+```bash
+$ cat ~/.ssh/id_ed25519.pub
+```
+
+Copy and paste this key to your github account: Settings -> SSH and GPG keys -> new SSH key.
+
+Now, you can finally clone your remote repository: 
+```bash
+$ git clone copied_adress
+```
+
+## Commit, pull, push on the remote repository
+
+We will just repeat the same steps as in the offline part. Let's create a new script:
+```bash
+$ echo “recall: 60%” >> new_script.py
+```
+
+Add it to the index:
+```bash
+$ git add new_script.py
+```
+
+Commit the modifications:
+```bash
+$ git commit -m "message de commit"
+```
+
+Push everything on your remote repo:
+```bash
+$ git push
+```

@@ -1,0 +1,128 @@
+# Handle errors in Git
+
+In this part, we will learn how to correct some small errors in Git: create a branch that you do not want, modify the main branch, forget files in the commit, etc. 
+
+## Errors in local repository
+
+Let's create a folder "Test" and initiate a repo. 
+
+### Create a branch that you do not want
+Create a file and commit it. If you main branch is named "master", type:
+```bash
+$ git branch -M main
+```
+Then create a new branch "branchTest". But you did not want to create this branch now but after adding some files. To delete it:
+```bash
+$ git branch -d branchTest
+``` 
+If you have previously done modifications on this branch, use:
+```bash
+$ git branch -D branchTest
+``` 
+
+### Modification on the main branch
+It is possible to modify a main branch inadvertently. There are two scenarios.
+
+#### Modification before a commit
+In this case, you have modified the main before creating your branch and you have not committed anything. You need to create a "stash": you put your modifications aside and then apply them to your new branch. 
+
+Modify a file on the main branch. Create a stash (kind of buffer):
+```bash
+$ git stash
+```
+If you type ```git status```, you see that your main branch is clean. Create a new branch "branchBeforeCommit". Then apply the stash:
+```bash
+$ git stash apply
+```
+If you have created many stashes, you can access their ID via:
+```bash
+$ git stash list
+```
+Then you can use ```git stash apply``` followed by the ID. 
+
+#### Modifications after a commit
+
+The case where you commit the modifications is more complex. Let's modify the files and commit. With ```git log```, you can access the ID/hash of your previous commits. Let's suppress the last commit with:
+```bash
+$ git reset --hard HEAD^
+```
+Create your new branch and use ```git reset --hard``` followed by the hash to apply the commit to your new branch. 
+
+### Wrong commit message
+The processing is very simple, just type:
+```bash
+$ git commit --amend -m "new commit message"
+```
+
+### Oversight of a file in a commit
+In the case where you forget to add a file to the last commit, use again ```git commit --amend --no-edit``` after ```git add```. 
+
+## Errors in the remote repository
+In this situation, you have pushed wrong files. We will present two important commands: ```git reset``` (already glimpsed) and ```git revert```.
+
+### Use ```git reset```
+Let's imagine a client requires some functionaly but changes his mind the next day. You will go backward with ```git reset```: this command has a **impact on the historic**. It can be used with three parameters: ```--hard```, ```--medium``` and ```--soft```. It is a command often use locally. 
+
+Let's begin with ```--hard```:
+```bash
+$ git reset --hard target_commit
+```
+This command enables to go backward to any target commit but you **absolutely forget everything that occurs after!**. 
+
+The option ```--medium``` enables to go backward just after the last commit or a specific one, without suppressing the last modifications. It is very useful to desindex a file that has not been committed. 
+```bash
+$ git reset --mixed HEAD~
+```
+The last option ```--soft``` makes it possible to move on a specific commit to see a snapshot or to create a new branch from a previous commit: it does not suppress files or commits.
+
+### Use ```git revert```
+Let's imagine you have added the wrong file to your commit. Instead of suppressing the commit from the historic, ```git revert``` creates a new commit with the last content: you do not loose the historic of your project. In the our scenario, you do your commit, you "cancel" it with:
+```bash
+$ git revert HEAD
+```
+Then you can remove the wrong file and recommit. 
+
+## Go backward in your project
+
+### ```git reflog```
+The goal of Git is to record the changes applied to your code:
+
+- who has contributed ?
+- Where bugs have been introduced ?
+- Cancel problematic changes.
+
+We have seen that ```git log``` lists all the commits from the most recent to the oldest with their hash code. 
+In order to have more details of your historic, use ```git reflog``` lists the commits but all the other actions: message modifications, merge, reset, etc. To move on a previous action, use ```git checkout hash```. 
+
+### ```git blame```
+If you discover a bug in your project, you want to identify its origin and to track every line of code. ```git blame file``` displays for each line:
+
+- its ID
+- its author
+- the date of the modification
+- the line number
+- the content
+
+### ```git cherry-pick``` to recover some specific commits
+Sometimes, you do not want to merge a whole branch into another and you only need some specific commits. 
+Imagine you work on "Branch1" and you do many commits but your colleague does not need all the modifications but only some. 
+Type:
+```bash
+$ git cherry-pick hashs
+```
+to duplicate the commits and add them to your main branch. 
+
+## Correct a bug 
+Let's imagine you develop a new functionality and during this time you note a bug and need to correct it. The method is the following:
+
+- keep into memory what you currently make using ```git stash```
+- find the bug using ```git log``` and ```git bisect```
+- restore the problematic file with ```git revert hash```
+- restore what you have done using ```git stash apply```.
+
+The new command here is ```git bisect``` with different options:
+
+- ```start``` to begin the research of the bug
+- ```bad HEAD``` to indicate that the bug is present in the last commit
+- ```good hash``` to indicate the most recent commit that does not have the bug
+From now, the command launches a dichomotic algorithm. For each commit where the command moves on indicate ```git bisect good``` if the bug is not present and ```git bisect bad``` if not. At the end of the process, you have finally found the commit where the bug appears for the first time, then use ```git revert hash```.   

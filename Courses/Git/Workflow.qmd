@@ -1,0 +1,30 @@
+# Workflows
+
+This part is not complete but for now, it gives some notions of a workflow.
+
+## What is a workflow ?
+The different collaborators can have different git using habits. A workflow is a set of recommandations to follow in order to use Git efficiently. In other words, it is a set of guidelines for all the collaborators. 
+
+A basic worflow is the **Feature Branch Workflow**: a branch is created for each functionality and once implemented, it is merged with the main branch. GitFlow is an extension of this workflow. 
+
+## GitFlow
+
+### What is Gitflow ?
+
+GitFlow is based on the Feature Branch Workflow (one branch=one functionality/feature) but it adds:
+
+- a branch called **develop** which integrates the feature branches
+- different **release** branches that gather a set of features that are considered as finished
+- **main branch** that contains only code coming from **release** branches
+- **hotfix** branches to solve bugs coming from the **main branch**
+
+![GitFlow organization](images/GitFlow.png)
+
+### Gitflow commands
+
+There is a GitFlow plug-in to make easier the use of  this workflow:
+
+- ```git flow init``` initiates the project, create the main branch and the branch **develop**
+- ```git flow feature start namefeature``` creates a new branch from the branch develop.
+- ```git flow feature finish namefeature``` merges the feature branch with the develop one. 
+- ```git flow release start 0.0.1``` creates the release and ```git flow release finish 0.0.1``` integrates the feature to the main branch. 

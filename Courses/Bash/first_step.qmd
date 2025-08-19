@@ -1,0 +1,137 @@
+# Some basics on Bash
+
+## Survival kit
+
+Open a Linux terminal (or a Git Bash for Windows) and type:
+```bash
+$ ls
+```
+As we can see, "ls" lists files and folders which are in the directory where we are when we execute the command.
+
+Let's type mkdir to create a new folder (in the same directory):
+```bash
+$ mkdir testfolder
+```
+
+I want now to enter in this folder (change directory)
+```bash
+$ cd testfolder
+```
+
+We can check the complete directory with 'pwd' (print working directory):
+```bash
+$ pwd
+```
+
+This folder is for now empty. Let's create a file:
+```bash
+$ touch testfile
+```
+
+The file is empty. To write in this file, we can use the 'echo' command (we will task later about the operator >):
+```bash
+$ echo "hello world" > testfile
+```
+
+Let's visualize the content of this file:
+```bash
+$ cat testfile
+```
+
+Let's try to add another content:
+```bash
+$ echo "new line" > testfile
+```
+The previous content has been suppressed. To add a content to a file, use '>>':
+```bash
+$ echo "new line" >> testfile
+```
+
+## Parameters for commands
+Most of the commands accept parameters to specify their behaviors. We will illustrate this on two commands: 'ls' and 'du' (size of file).
+
+### Parameters of ls
+- "-a" displays all the hidden files and folders
+```bash
+$ ls -a
+```
+- '-l' gives details about each file.
+```bash
+$ ls -l
+```
+The following information are provided:
+1. File permission (later subject)
+2. Number of physical links
+3. Owner of the file
+4. Group owner
+5. Size of the file (octets)
+6. Last update
+7. Name 
+- 'h' enables to have readeable size (K,Mo,...)
+```bash
+$ ls -lh
+```
+- 't' arranges the files according to the date of the last change:
+```bash
+$ ls -lt
+```
+
+### The command cd
+To return to the parent folder:
+```bash
+$ cd ..
+```
+If you want to return to the home folder:
+```bash
+$ cd ~
+```
+
+### The command du (optional)
+```bash
+$ du
+```
+gives the size of all the folders in the current directory.
+```bash
+$ du -h
+```
+gives readeable size (K,Mo,...).
+```bash
+$ du -a
+```
+gives the size of files and folders since 'du' only displays size of folders by default.
+```bash
+$ du -s
+```
+displays the size of the whole folder without detailing each sub-folder.
+
+## Introduction to Vim
+
+Vim is one of the text editor available in the terminal. We will see how to use it **basically**. To open vim on "testFile":
+```bash
+$ vim testFile
+```
+
+### Different modes
+Vim has three different modes:
+
+- interractive mode where you cannot write in your file, but you can move, do copy past, cancel out your actions.
+- insertion mode where you can write your text, code. To activate this mode, use ```i```. To escape this mode, use ```Echap```.
+- command mode where you can execute some commands: register, quit, activate some options like the numbering. To activate this mode, use ```:``` from the interractive mode. 
+
+### Basics
+We sum up some commands to move efficiently in the file and register your modifications:
+
+- ```0``` and ```$``` enable to move at the beginning or the end of the file (interractive model).
+- ```:w nameFile``` to save your file (insertion mode).
+- ```:q``` to quit the file (insertion mode).
+- ```:wq``` to save and quit the file (insertion mode).
+- ``` x``` to suppress a letter. ```(number) x``` to suppress a certain number of letters. 
+- ```(number)dd``` to suppress/cut a certain number of lines.
+- ```dw``` to suppress a word. 
+- ```d0``` or ```d$``` to suppress the beginning or the end of the line. 
+- ```yy``` to copy a line. 
+- ```(number)p``` to paste.
+- ```u``` to cancel the modifications.
+- ```(n)G``` to move to the line n.
+- ```:set number``` to activate the numbering. 
+

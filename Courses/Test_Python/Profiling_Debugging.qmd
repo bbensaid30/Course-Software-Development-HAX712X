@@ -1,0 +1,315 @@
+---
+title: "Debugging & Profiling"
+---
+
+## Time efficiency
+
+
+### Time/computation: usage of `%timeit`
+**References**:
+
+- [Built-in magic commands](https://ipython.org/ipython-doc/3/interactive/magics.html)
+- [autoreload](https://ipython.org/ipython-doc/3/config/extensions/autoreload.html)
+
+
+*magic* commands are IPython commands such as: `%timeit`, `%matplotlib`, `%autoreload`.
+They work only in interactive cases (Ipython, Jupyter Notebook, Jupyter lab, etc.).
+
+```{python}
+
+import time
+import numpy as np
+import matplotlib.pyplot as plt
+
+n = 1000
+val = 5.4
+```
+
+Let us compare the time to create a vector of size `n` and fill it with the value `val` with various methods, using the `
+
+
+```{python}
+print('Using empty and fill:')
+%timeit a = np.empty(n); a.fill(val)
+# Alternative: uncomment below
+# from IPython import get_ipython
+# get_ipython().run_line_magic('timeit', 'a = np.empty(n); a.fill(val)')
+```
+
+```{python}
+print('Using empty and list syntax:')
+%timeit a = np.empty(n); a[:] = val
+```
+
+```{python}
+print('Using full:')
+%timeit a = np.full((n,), val)
+```
+
+```{python}
+print('Using ones:')
+%timeit a = np.ones(n) * val
+```
+
+```{python}
+print('Using repeat:')
+%timeit a = np.repeat(val, n)
+```
+
+
+### Alternatives for time measurement
+Another classical way to time a chunk of code is to use the `time` module, as follows:
+
+```{python}
+import time
+start = time.time()
+a = np.ones(n) * val
+end = time.time()
+print(f"Execution time: {end - start:.5f} s.")
+```
+
+
+## Memory efficiency
+
+### `memory_profiler`
+
+**This module is deprecated and do not run with Python 3.12**
+
+You can run a memory profiler with the following magic command (other alternatives are available but require more coding and exporting the reports):
+
+```python
+%load_ext memory_profiler
+```
+For illustration we compare a way to perform a distance matrix computation between two vectors, using a double loop or a vectorized approach.
+
+```{python}
+n1 = 100
+n2 = 100
+x = np.random.randn(n1)
+y = np.random.randn(n2)
+```
+
+```{python}
+%%file mprun_demo.py
+import numpy as np
+
+
+def inv_distance(x, y):
+    n1 = len(x)
+    n2 = len(y)
+    dist = np.empty((n1, n2))
+    for i in range(n1):
+        for j in range(n2):
+            dist[i, j] = 1.0 / np.sqrt((x[i] - y[j]) ** 2)
+    return dist
+
+
+def inv_distance_vect(x, y):
+    n1 = len(x)
+    n2 = len(y)
+    return 1.0 / np.sqrt((x.reshape((n1, 1)) - y.reshape((1, n2))) ** 2)
+
+```
+
+We can time the execution of the two functions:
+
+```{python}
+from mprun_demo import inv_distance, inv_distance_vect
+%timeit inv_distance(x, y)
+%timeit inv_distance_vect(x, y)
+```
+The conclusion is simple: try to avoid loops in Python when performing matrix computation, and use vectorization and broadcasting as much as possible (or use `numba` or `cython`).
+
+
+Some memory profiling can be performed with the `memory_profiler` package to investigate any difference in the memory footprint:
+
+```python
+%mprun -f inv_distance inv_distance(x, y)
+```
+
+```python
+%mprun -T mprun0 -f inv_distance_vect inv_distance_vect(x, y)
+print(open('mprun0', 'r').read())
+```
+
+In this case, the difference is almost negligible concerning memory, only the time computation was significantly different between the two approaches.
+
+## Profiling
+
+A profile is a set of statistics that describes the time taken by various parts of a program.
+
+### `cProfile`
+The  [cProfile](https://docs.python.org/3/library/profile.html) module provides deterministic profiling of Python programs. A profile is a set of statistics describing how often and for how long various parts of the program run.
+
+
+Let us illustrate the profiling for some of the previous examples.
+
+
+```{python}
+import cProfile
+cProfile.run('a = np.empty(n); a.fill(val)','fill.prof')
+```
+```{python}
+cProfile.run('a = np.ones(n) * val','ones.prof')
+```
+
+```{python}
+cProfile.run('inv_distance_vect(x, y)', 'inv_distance_vect.prof')
+```
+
+
+### `line_profiler`
+
+You can use inline magic commands to profile a function line by line.
+
+```python
+%load_ext line_profiler
+```
+
+```python
+%lprun -f inv_distance_vect inv_distance_vect(x, y)
+```
+or
+```python
+%lprun -T lprof0 -f inv_distance inv_distance(x, y)
+print(open('lprof0', 'r').read())
+```
+
+An alternative is to use the `kernprof` package and `@profile` decorator, see examples [here](https://coderzcolumn.com/tutorials/python/line-profiler-line-by-line-profiling-of-python-code).
+
+### Visualization of the profiling results
+
+- [`snakeviz`](https://jiffyclub.github.io/snakeviz/): a browser-based graphical viewer for the output of Python's `cProfile`. [Here](https://www.youtube.com/watch?v=qhb7cehwChc) is a video tutorial.
+Launch the command `snakeviz program.prof`
+
+```{python}
+%load_ext snakeviz
+%snakeviz -t inv_distance(x, y)
+```
+The output generated is an interactive file that can be investigated in a browser, looking like:
+
+![snakeviz](snakeviz.png)
+
+
+- [`gprof2dot`](https://github.com/jrfonseca/gprof2dot)
+    a Python script to convert the output from many profilers (including `cProfile`'s output) into a dot graph, with export in .svg.
+    You can run it in your terminal with the following commands:
+    ```default
+    python -m cProfile -o output.pstats inv_distances.py
+    gprof2dot.py -f pstats output.pstats | dot -Tsvg -o output.svg
+    ```
+    You can then display the .svg file:
+    ![gprof2dot](output.svg)
+    <!-- **References**:
+    - [`profvis`, in R](https://rstudio.github.io/profvis/) -->
+- [`viztracer](https://github.com/gaogaotiantian/viztracer): a nice solution that provides html output with interactive visualization. This can lead to very large traces for non-trivial programs. In this case it is recommended to trim the shortest function calls from the trace file before attempting to load it in the visualizer (See filter options [here](https://viztracer.readthedocs.io/en/stable/filter.html)).
+
+- [`py-spy`](https://github.com/benfred/py-spy): this package can be combined with [`speedscope`](https://github.com/jlfwong/speedscope) for nice visualization.
+
+- [general help on Python profiling](https://cerfacs.fr/coop/python-profiling)
+
+## Debugging with `pdb`
+
+Let us use `import pdb; pdb.set_trace()` to enter a code and inspect it.
+Push the key `c` and then `enter` to go next.
+
+A first recommendation is to use the `python` debugger in your IDE.
+
+
+Pure `python` or IPython can use the `pdb` package and the
+command `pdb.set_trace()`.
+A command prompt launches when an error is met, and you can check the current
+status of the environment.
+Useful shortcuts are available (*e.g.,* the c key or the j key, etc.); a full list is available [here](c).
+For instance, you can quit the debugger with the command `q` or `quit`
+```python
+def function_debile(x):
+    answer = 42
+    answer += x
+    return answer
+
+```
+
+```python
+function_debile(12)
+```
+
+```python
+def illustrate_pdb(x):
+    answer = 42
+    for i in range(10):
+        import pdb; pdb.set_trace()
+        answer += i
+    answer += x
+    return answer
+```
+
+```python
+illustrate_pdb(12)
+```
+
+A terminal is launched when a problem occurs, and one can then take over and see what's going on.
+
+```python
+get_ipython().run_line_magic('pdb', '')
+# %pdb
+```
+
+```python
+def blobl_func(x):
+    answer = 0
+    for i in range(x, -1, -1):
+        print(i)
+        answer += 1 / i
+
+    return answer
+
+blobl_func(4)
+```
+
+
+
+## Debugging with VSCode
+
+You can use the debugger in VSCode to debug your code. Here is a [video](https://www.youtube.com/watch?v=XmpIBsnc3xU) by Arjan Code on the topic.
+
+The main point is that you can set breakpoints in your code and then run the debugger to inspect the variables and the flow of the code. All that is done in the IDE, which is very convenient.
+
+For that just click on the left of the line number to set a breakpoint, and then run the debugger with the green arrow.
+
+Below is a simple example of a code that can be debugged in VSCode:
+
+```python
+
+# %%
+def sieve_of_eratosthenes(limit):
+    # Create a boolean array "prime[0..limit]" and initialize
+    # all entries it as false. A value in prime[i] will
+    # finally be false if i is Not a prime, true if i is a prime.
+    prime = [True for _ in range(limit + 1)]
+    p = 2
+    while p * p < limit:
+        # If prime[p] is not changed, then it is a prime
+        if prime[p] == True:
+            # Update all multiples of p
+            for i in range(p * p, limit + 1, p):
+                prime[i] = False
+        p += 1
+
+    # Collect all prime numbers
+    prime_numbers = [p for p in range(2, limit) if prime[p]]
+    return prime_numbers
+
+
+print(sieve_of_eratosthenes(100))
+print(sieve_of_eratosthenes(101))
+
+```
+Click on ![debug_icon](debug_icon.png) and let the debugger run. You can then inspect the variables and the flow of the code to understand what it is doing.
+
+
+**References**:
+
+- [Debugging Jupyter notebooks ](https://davidhamann.de/2017/04/22/debugging-jupyter-notebooks/) by David Hamann
+- [Advanced Python Debugging with pdb](https://www.codementor.io/@stevek/advanced-python-debugging-with-pdb-g56gvmpfa) by Steven Kryskalla
+- [Debug Python with VSCode](https://www.youtube.com/watch?v=w8QHoVam1-I)
