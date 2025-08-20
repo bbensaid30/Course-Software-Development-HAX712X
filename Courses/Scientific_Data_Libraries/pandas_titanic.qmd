@@ -30,10 +30,13 @@ pd.options.display.max_rows = 8
 First, it is important to download automatically remote files for reproducibility (and avoid typing names manually). Let us apply this to the Titanic dataset:
 
 ```{python}
-url = "https://github.com/bbensaid30/Course-Software-Development-HAX712X/tree/main/Data/titanic.csv"
+'''
+# works locally but not on the website
+url = "https://github.com/bbensaid30/Course-Software-Development-HAX712X/tree/main/Courses/Scientific_Data_Libraries/"
 path_target = "./titanic.csv"
 path, fname = os.path.split(path_target)
 pooch.retrieve(url, path=path, fname=fname, known_hash=None)  # if needed `pip install pooch`
+'''
 ```
 
 Reading the file as a `pandas` dataframe with `read_csv`:

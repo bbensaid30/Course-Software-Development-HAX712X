@@ -28,24 +28,33 @@ pd.options.display.max_rows = 8
 This part studies air quality in Paris (Source: **Airparif**) with `pandas`.
 
 ```{python}
-url = "http://josephsalmon.eu/enseignement/datasets/20080421_20160927-PA13_auto.csv"
+'''
+# works locally but not on 
+url = "https://github.com/bbensaid30/Course-Software-Development-HAX712X/tree/main/Courses/Scientific_Data_Libraries/20080421_20160927-PA13_auto.csv"
 path_target = "./20080421_20160927-PA13_auto.csv"
 path, fname = os.path.split(path_target)
 pooch.retrieve(url, path=path, fname=fname, known_hash=None)
+'''
 ```
 
 For instance, you can run in a terminal:
 ```{python}
+'''
+# same thing
 #| eval: false
 !head -26 ./20080421_20160927-PA13_auto.csv
+'''
 ```
 
 Alternatively:
 
 ```{python}
+'''
+# same thing as before
 #| eval: false
 from IPython import get_ipython
 get_ipython().system('head -26 ./20080421_20160927-PA13_auto.csv')
+'''
 ```
 
 **References**:
