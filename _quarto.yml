@@ -18,6 +18,14 @@ project:
     - Courses/OPP/modules.qmd
     - Courses/OPP/Classes_Exceptions.qmd
     - Courses/OPP/Docs.qmd
+    - Courses/IDEs/VSCode.qmd
+    - Courses/Scientific_Data_Libraries/Venv.qmd
+    - Courses/Scientific_Data_Libraries/Numpy.qmd
+    - Courses/Scientific_Data_Libraries/Scipy.qmd
+    - Courses/Scientific_Data_Libraries/Visualization.qmd
+    - Courses/Scientific_Data_Libraries/pandas_titanic.qmd
+    - Courses/Scientific_Data_Libraries/pandas_bikes.qmd
+    - Courses/Scientific_Data_Libraries/pandas_airparif.qmd
 
 website:
   bread-crumbs: false
@@ -63,6 +71,7 @@ website:
       - about.qmd
       - sidebar:general
       - sidebar:python
+      - sidebar:libraries
 
   sidebar:
       - id: general
@@ -82,6 +91,9 @@ website:
               - Courses/Git/Collaborative_PartII.qmd
               - Courses/Git/Errors.qmd
               - Courses/Git/Workflow.qmd
+          - section: "IDEs"
+            contents:
+              - Courses/IDEs/VSCode.qmd
       - id: python
         title: "Python Tools"
         collapse-level: 3
@@ -97,11 +109,28 @@ website:
               - Courses/OPP/modules.qmd
               - Courses/OPP/Classes_Exceptions.qmd
               - Courses/OPP/Docs.qmd
+      - id: libraries
+        title: "Scientific/Data Libraries in Python"
+        collapse-level: 3
+        contents:
+          - section: "Generality"
+            contents:
+              - Courses/Scientific_Data_Libraries/Venv.qmd
+              - Courses/Scientific_Data_Libraries/Visualization.qmd
+          - section: "Scientific Libraries"
+            contents:
+              - Courses/Scientific_Data_Libraries/Numpy.qmd
+              - Courses/Scientific_Data_Libraries/Scipy.qmd
+          - section: "Pandas"
+            contents:
+              - Courses/Scientific_Data_Libraries/pandas_titanic.qmd
+              - Courses/Scientific_Data_Libraries/pandas_bikes.qmd
+              - Courses/Scientific_Data_Libraries/pandas_airparif.qmd
             
   page-footer:
     left: |
       <span class="faux-block">{{< fa brands creative-commons >}} 2025 Bensaid Bilel </span>
-      <span class="faux-block"><a href="https://github.com/josephsalmon/HAX712X">{{< fa brands github >}} Source Code</a></span>
+      <span class="faux-block"><a href="https://bbensaid30.github.io/Course-Software-Development-HAX712X/">{{< fa brands github >}} Source Code</a></span>
     # center: |
     #   <span class="faux-block"><a href="/impressum/index.html">Impressum</a></span>
     right: |
@@ -117,7 +146,6 @@ format:
 
 #execute:
   #freeze: auto
-# 
 
 
 
