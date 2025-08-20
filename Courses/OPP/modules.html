@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -73,10 +73,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-4df3b0c4fafa0f66eafcead0ee6cff11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-beeb72b8632ac0cef4471ce89405e910.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -177,6 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../Courses/Git/Workflow.html">
  <span class="dropdown-text">Workflows</span></a>
   </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IDEs</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/IDEs/VSCode.html">
+ <span class="dropdown-text">Integrated Development Environment</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -214,6 +220,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../Courses/OPP/Docs.html">
  <span class="dropdown-text">Markup languages / Documentation</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-scientificdata-libraries-in-python" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Scientific/Data Libraries in Python</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-scientificdata-libraries-in-python">    
+        <li class="dropdown-header">Generality</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/Venv.html">
+ <span class="dropdown-text">Virtual Python Environment</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/Visualization.html">
+ <span class="dropdown-text">Data Visualization</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Scientific Libraries</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/Numpy.html">
+ <span class="dropdown-text">Numpy cheat sheet</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/Scipy.html">
+ <span class="dropdown-text">SciPy</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Pandas</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/pandas_titanic.html">
+ <span class="dropdown-text">Titanic dataset</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/pandas_bikes.html">
+ <span class="dropdown-text">Bike accident dataset</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/pandas_airparif.html">
+ <span class="dropdown-text">Airparif dataset</span></a>
   </li>  
     </ul>
   </li>
@@ -371,40 +417,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="a-module-could-be-a-single-file" class="level3">
 <h3 class="anchored" data-anchor-id="a-module-could-be-a-single-file">A module could be a single file</h3>
 <p>Indeed, a module can simply be a single file:</p>
-<div id="113e713b" class="cell" data-execution_count="1">
+<div id="9f84d843" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fibo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This does not enter the names of the functions defined in <code>fibo</code> directly in the current symbol table though; it only enters the module name <code>fibo</code> there. Using the module name you can access the functions:</p>
-<div id="06990521" class="cell" data-execution_count="2">
+<div id="8dc582a5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fibo.fib_print(<span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 </code></pre>
 </div>
 </div>
-<div id="2518981f" class="cell" data-execution_count="3">
+<div id="f303d945" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fibo.fib_list(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]</code></pre>
 </div>
 </div>
 <p>When importing a module, several methods are (automatically) defined. Their names are usually prefixed and suffixed by the symbol <code>__</code>, e.g.,</p>
-<div id="87b40b54" class="cell" data-execution_count="4">
+<div id="357811ce" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fibo.<span class="va">__name__</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>'fibo'</code></pre>
 </div>
 </div>
-<div id="5f7eda46" class="cell" data-execution_count="5">
+<div id="0bb19ed7" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fibo.<span class="va">__file__</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>'/home/runner/work/Course-Software-Development-HAX712X/Course-Software-Development-HAX712X/Courses/OPP/fibo.py'</code></pre>
+<pre><code>'/home/bbensaid/Documents/Cours_MCF1/Dev_Logiciel_website/Courses/OPP/fibo.py'</code></pre>
 </div>
 </div>
 </section>
 <section id="or-a-module-could-be-a-directory" class="level3">
 <h3 class="anchored" data-anchor-id="or-a-module-could-be-a-directory">… or a module could be a directory</h3>
 <p>You can also import a full directory (containing many <code>python</code> files stored in a sub-folder). <code>python</code> looks for a folder located in <code>sys.path</code> list. You have already imported the <code>numpy</code> module, for numerical analysis with <code>python</code>:</p>
-<div id="dbd1cceb" class="cell" data-execution_count="6">
+<div id="3fb14ea8" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.array([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]).reshape(<span class="dv">2</span>, <span class="dv">2</span>))</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.array([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]).mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -415,10 +461,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>In fact, you have imported the following folder:</p>
-<div id="67248d7d" class="cell" data-execution_count="7">
+<div id="70b01385" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>np.__path__</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>['/opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/numpy']</code></pre>
+<pre><code>['/home/bbensaid/.local/lib/python3.10/site-packages/numpy']</code></pre>
 </div>
 </div>
 <p>Depending on your installation you might obtain <code>['/usr/lib/python3.9/site-packages/numpy']</code> or <code>['/home/username/anaconda3/lib/python3.7/site-packages/numpy']</code> if you installed with Anaconda.</p>
@@ -450,7 +496,7 @@ Useful tips
 <section id="the-dir-function" class="level3">
 <h3 class="anchored" data-anchor-id="the-dir-function">The <code>dir()</code> function</h3>
 <p>The built-in function <code>dir()</code> is used to find out which names a module defines. It returns a sorted list of strings:</p>
-<div id="4acbf0b9" class="cell" data-execution_count="8">
+<div id="bdb73305" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fibo, numpy</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">dir</span>(fibo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
@@ -466,17 +512,15 @@ Useful tips
  'fib_print']</code></pre>
 </div>
 </div>
-<div id="51c3cf57" class="cell" data-execution_count="9">
+<div id="9cc7e707" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">dir</span>(numpy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="scroll-container" style="overflow-y: scroll; height: 400px;">
-<div id="518eae70" class="cell" data-execution_count="10">
+<div id="32362eb0" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>['ALLOW_THREADS',
- 'AxisError',
  'BUFSIZE',
  'CLIP',
- 'ComplexWarning',
  'DataSource',
  'ERR_CALL',
  'ERR_DEFAULT',
@@ -496,7 +540,6 @@ Useful tips
  'MAXDIMS',
  'MAY_SHARE_BOUNDS',
  'MAY_SHARE_EXACT',
- 'ModuleDeprecationWarning',
  'NAN',
  'NINF',
  'NZERO',
@@ -510,12 +553,9 @@ Useful tips
  'SHIFT_OVERFLOW',
  'SHIFT_UNDERFLOW',
  'ScalarType',
- 'Tester',
- 'TooHardError',
  'True_',
  'UFUNC_BUFSIZE_DEFAULT',
  'UFUNC_PYVALS_NAME',
- 'VisibleDeprecationWarning',
  'WRAP',
  '_CopyMode',
  '_NoValue',
@@ -530,8 +570,9 @@ Useful tips
  '__doc__',
  '__expired_functions__',
  '__file__',
+ '__former_attrs__',
+ '__future_scalars__',
  '__getattr__',
- '__git_version__',
  '__loader__',
  '__name__',
  '__package__',
@@ -539,13 +580,22 @@ Useful tips
  '__spec__',
  '__version__',
  '_add_newdoc_ufunc',
+ '_builtins',
+ '_core',
  '_distributor_init',
  '_financial_names',
+ '_get_promotion_state',
  '_globals',
+ '_int_extended_msg',
  '_mat',
+ '_no_nep50_warning',
  '_pyinstaller_hooks_dir',
  '_pytesttester',
- '_version',
+ '_set_promotion_state',
+ '_specific_msg',
+ '_typing',
+ '_using_numpy2_behavior',
+ '_utils',
  'abs',
  'absolute',
  'add',
@@ -605,7 +655,6 @@ Useful tips
  'blackman',
  'block',
  'bmat',
- 'bool8',
  'bool_',
  'broadcast',
  'broadcast_arrays',
@@ -616,7 +665,6 @@ Useful tips
  'busdaycalendar',
  'byte',
  'byte_bounds',
- 'bytes0',
  'bytes_',
  'c_',
  'can_cast',
@@ -649,7 +697,6 @@ Useful tips
  'copy',
  'copysign',
  'copyto',
- 'core',
  'corrcoef',
  'correlate',
  'cos',
@@ -685,6 +732,7 @@ Useful tips
  'dsplit',
  'dstack',
  'dtype',
+ 'dtypes',
  'e',
  'ediff1d',
  'einsum',
@@ -695,10 +743,12 @@ Useful tips
  'equal',
  'errstate',
  'euler_gamma',
+ 'exceptions',
  'exp',
  'exp2',
  'expand_dims',
  'expm1',
+ 'expm1x',
  'extract',
  'eye',
  'fabs',
@@ -778,7 +828,6 @@ Useful tips
  'infty',
  'inner',
  'insert',
- 'int0',
  'int16',
  'int32',
  'int64',
@@ -845,10 +894,8 @@ Useful tips
  'ma',
  'mask_indices',
  'mat',
- 'math',
  'matmul',
  'matrix',
- 'matrixlib',
  'max',
  'maximum',
  'maximum_sctype',
@@ -898,13 +945,11 @@ Useful tips
  'numarray',
  'number',
  'obj2sctype',
- 'object0',
  'object_',
  'ogrid',
  'oldnumeric',
  'ones',
  'ones_like',
- 'os',
  'outer',
  'packbits',
  'pad',
@@ -988,6 +1033,7 @@ Useful tips
  'shares_memory',
  'short',
  'show_config',
+ 'show_runtime',
  'sign',
  'signbit',
  'signedinteger',
@@ -1008,13 +1054,11 @@ Useful tips
  'squeeze',
  'stack',
  'std',
- 'str0',
  'str_',
  'string_',
  'subtract',
  'sum',
  'swapaxes',
- 'sys',
  'take',
  'take_along_axis',
  'tan',
@@ -1043,7 +1087,6 @@ Useful tips
  'ubyte',
  'ufunc',
  'uint',
- 'uint0',
  'uint16',
  'uint32',
  'uint64',
@@ -1058,7 +1101,6 @@ Useful tips
  'unravel_index',
  'unsignedinteger',
  'unwrap',
- 'use_hugepage',
  'ushort',
  'vander',
  'var',
@@ -1066,10 +1108,8 @@ Useful tips
  'vectorize',
  'version',
  'void',
- 'void0',
  'vsplit',
  'vstack',
- 'warnings',
  'where',
  'who',
  'zeros',
@@ -1079,14 +1119,14 @@ Useful tips
 </div>
 <!-- The `0x7fe0a25e81e0` hexadecimal number is the `id` of the object: 
 
-::: {#731c87d0 .cell execution_count=11}
+::: {#9fc8122a .cell execution_count=11}
 ``` {.python .cell-code}
 hex(id(numpy.__dir__))
 ```
 
 ::: {.cell-output .cell-output-display execution_count=10}
 ```
-'0x7f34b413ae60'
+'0x75079cf23ac0'
 ```
 :::
 :::
@@ -1101,13 +1141,13 @@ This is an integer (or long integer) that is guaranteed to be unique and constan
 <h3 class="anchored" data-anchor-id="namespaces">Namespaces</h3>
 <p>A namespace is a set of names (functions, variables, etc.). Different namespaces can co-exist at a given time but are completely isolated. In this way, you can control which function you are using.</p>
 <p>A namespace containing all the built-in names is created when we start the <code>python</code> interpreter and exists as long we don’t exit.</p>
-<div id="8234398c" class="cell" data-execution_count="12">
+<div id="b82e25ea" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cos(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
 <pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[11], line 1</span>
+Cell <span class="ansi-green-fg">In [11], line 1</span>
 <span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">cos</span>(<span style="color:rgb(98,98,98)">3</span>)
 
 <span class="ansi-red-fg">NameError</span>: name 'cos' is not defined</pre>
@@ -1115,7 +1155,7 @@ Cell <span class="ansi-green-fg">In[11], line 1</span>
 </div>
 </div>
 <p>You need to import a package for mathematical functions:</p>
-<div id="702424f1" class="cell" data-execution_count="13">
+<div id="97e2a69c" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math, numpy <span class="im">as</span> np</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(math.cos(<span class="dv">3</span>), np.cos(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1136,7 +1176,7 @@ Cell <span class="ansi-green-fg">In[11], line 1</span>
 <section id="checking-if-a-module-exists" class="level3">
 <h3 class="anchored" data-anchor-id="checking-if-a-module-exists">Checking if a module exists</h3>
 <p>Find the loader for a module, optionally within the specified path.</p>
-<div id="807a6441" class="cell" data-execution_count="14">
+<div id="90eb0300" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>spam_spec <span class="op">=</span> importlib.util.find_spec(<span class="st">"spam"</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>found <span class="op">=</span> spam_spec <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
@@ -1146,12 +1186,12 @@ Cell <span class="ansi-green-fg">In[11], line 1</span>
 </div>
 </div>
 <p>Now,</p>
-<div id="d1f28bf0" class="cell" data-execution_count="15">
+<div id="bd17b5ad" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>numpy_spec <span class="op">=</span> importlib.util.find_spec(<span class="st">"numpy"</span>)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numpy_spec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ModuleSpec(name='numpy', loader=&lt;_frozen_importlib_external.SourceFileLoader object at 0x7f34b4a03bb0&gt;, origin='/opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/numpy/__init__.py', submodule_search_locations=['/opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/numpy'])</code></pre>
+<pre><code>ModuleSpec(name='numpy', loader=&lt;_frozen_importlib_external.SourceFileLoader object at 0x75079ff186a0&gt;, origin='/home/bbensaid/.local/lib/python3.10/site-packages/numpy/__init__.py', submodule_search_locations=['/home/bbensaid/.local/lib/python3.10/site-packages/numpy'])</code></pre>
 </div>
 </div>
 <p>should return more information and where the loader is.</p>
@@ -1878,7 +1918,7 @@ About the data folder
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><span class="faux-block">{{&lt; fa brands creative-commons &gt;}} 2025 Bensaid Bilel </span> <span class="faux-block"><a href="https://github.com/josephsalmon/HAX712X">{{&lt; fa brands github &gt;}} Source Code</a></span></p>
+<p><span class="faux-block">{{&lt; fa brands creative-commons &gt;}} 2025 Bensaid Bilel </span> <span class="faux-block"><a href="https://bbensaid30.github.io/Course-Software-Development-HAX712X/">{{&lt; fa brands github &gt;}} Source Code</a></span></p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

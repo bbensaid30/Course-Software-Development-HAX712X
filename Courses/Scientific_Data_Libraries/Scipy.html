@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>SciPy – HAX712X: Software development for data science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../Courses/Scientific_Data_Libraries/pandas_titanic.html" rel="next">
+<link href="../../Courses/Scientific_Data_Libraries/Numpy.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-beeb72b8632ac0cef4471ce89405e910.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Data Science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../about.qmd"> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-general-tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">General tools</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-general-tools">    
+        <li class="dropdown-header">Bash</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/Bash/first_step.html">
+ <span class="dropdown-text">Some basics on Bash</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Bash/handled_files.html">
+ <span class="dropdown-text">Manipulate files and permissions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Bash/streams_research.html">
+ <span class="dropdown-text">Extract, sort and filter data</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Git</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/Git/Basis_PartI.html">
+ <span class="dropdown-text">Basic commands: locally</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Git/Basis_PartII.html">
+ <span class="dropdown-text">Basic commands: remote repo</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Git/Collaborative_PartI.html">
+ <span class="dropdown-text">Collaborative Git (PartI)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Git/Collaborative_PartII.html">
+ <span class="dropdown-text">Collaborative Git (PartII)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Git/Errors.html">
+ <span class="dropdown-text">Handle errors in Git</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Git/Workflow.html">
+ <span class="dropdown-text">Workflows</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IDEs</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/IDEs/VSCode.html">
+ <span class="dropdown-text">Integrated Development Environment</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-python-tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Python Tools</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-python-tools">    
+        <li class="dropdown-header">Testing Tools</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/Test_Python/Unit_Test.html">
+ <span class="dropdown-text">Unit Tests</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Test_Python/TimeMemory.html">
+ <span class="dropdown-text">Sparse matrices, graphs and maps</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Test_Python/Profiling_Debugging.html">
+ <span class="dropdown-text">Debugging &amp; Profiling</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Test_Python/CI.html">
+ <span class="dropdown-text">Continuous Integration</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">OOP</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/OPP/modules.html">
+ <span class="dropdown-text">Creating a Python module</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/OPP/Classes_Exceptions.html">
+ <span class="dropdown-text">Classes &amp; Exceptions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/OPP/Docs.html">
+ <span class="dropdown-text">Markup languages / Documentation</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-scientificdata-libraries-in-python" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Scientific/Data Libraries in Python</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-scientificdata-libraries-in-python">    
+        <li class="dropdown-header">Generality</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/Venv.html">
+ <span class="dropdown-text">Virtual Python Environment</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/Visualization.html">
+ <span class="dropdown-text">Data Visualization</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Scientific Libraries</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/Numpy.html">
+ <span class="dropdown-text">Numpy cheat sheet</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/Scipy.html">
+ <span class="dropdown-text">SciPy</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Pandas</li>
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/pandas_titanic.html">
+ <span class="dropdown-text">Titanic dataset</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/pandas_bikes.html">
+ <span class="dropdown-text">Bike accident dataset</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Courses/Scientific_Data_Libraries/pandas_airparif.html">
+ <span class="dropdown-text">Airparif dataset</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title">SciPy</h1>
+        </a>     
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Generality</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Courses/Scientific_Data_Libraries/Venv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Virtual Python Environment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Courses/Scientific_Data_Libraries/Visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Visualization</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Scientific Libraries</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Courses/Scientific_Data_Libraries/Numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numpy cheat sheet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Courses/Scientific_Data_Libraries/Scipy.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">SciPy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Pandas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Courses/Scientific_Data_Libraries/pandas_titanic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Titanic dataset</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Courses/Scientific_Data_Libraries/pandas_bikes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bike accident dataset</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Courses/Scientific_Data_Libraries/pandas_airparif.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Airparif dataset</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link" data-scroll-target="#linear-algebra">Linear algebra</a>
+  <ul class="collapse">
+  <li><a href="#solving-linear-systems" id="toc-solving-linear-systems" class="nav-link" data-scroll-target="#solving-linear-systems">Solving linear systems:</a></li>
+  <li><a href="#matrix-operations" id="toc-matrix-operations" class="nav-link" data-scroll-target="#matrix-operations">Matrix operations</a></li>
+  <li><a href="#norms" id="toc-norms" class="nav-link" data-scroll-target="#norms">Norms</a></li>
+  </ul></li>
+  <li><a href="#random-generation-distributions-etc." id="toc-random-generation-distributions-etc." class="nav-link" data-scroll-target="#random-generation-distributions-etc.">Random generation, distributions, etc.</a></li>
+  <li><a href="#optimization" id="toc-optimization" class="nav-link" data-scroll-target="#optimization">Optimization</a>
+  <ul class="collapse">
+  <li><a href="#finding-local-minima" id="toc-finding-local-minima" class="nav-link" data-scroll-target="#finding-local-minima">Finding (local!) minima</a></li>
+  <li><a href="#find-the-zeros-of-a-function" id="toc-find-the-zeros-of-a-function" class="nav-link" data-scroll-target="#find-the-zeros-of-a-function">Find the zeros of a function</a></li>
+  <li><a href="#parameters-estimation" id="toc-parameters-estimation" class="nav-link" data-scroll-target="#parameters-estimation">Parameters estimation</a></li>
+  </ul></li>
+  <li><a href="#interpolation" id="toc-interpolation" class="nav-link" data-scroll-target="#interpolation">Interpolation</a></li>
+  <li><a href="#images" id="toc-images" class="nav-link" data-scroll-target="#images">Images</a>
+  <ul class="collapse">
+  <li><a href="#rgb-decomposition" id="toc-rgb-decomposition" class="nav-link" data-scroll-target="#rgb-decomposition">RGB decomposition</a></li>
+  <li><a href="#convert-a-color-image-in-grayscale" id="toc-convert-a-color-image-in-grayscale" class="nav-link" data-scroll-target="#convert-a-color-image-in-grayscale">Convert a color image in grayscale</a></li>
+  <li><a href="#changing-colors-in-an-image" id="toc-changing-colors-in-an-image" class="nav-link" data-scroll-target="#changing-colors-in-an-image">Changing colors in an image</a></li>
+  <li><a href="#rgba" id="toc-rgba" class="nav-link" data-scroll-target="#rgba">RGBA</a></li>
+  <li><a href="#hexadecimal-decomposition" id="toc-hexadecimal-decomposition" class="nav-link" data-scroll-target="#hexadecimal-decomposition">Hexadecimal decomposition</a></li>
+  <li><a href="#cmyk-decomposition" id="toc-cmyk-decomposition" class="nav-link" data-scroll-target="#cmyk-decomposition">CMYK decomposition</a></li>
+  <li><a href="#hsl-hue-saturation-lightness" id="toc-hsl-hue-saturation-lightness" class="nav-link" data-scroll-target="#hsl-hue-saturation-lightness">HSL (hue, saturation, lightness)</a></li>
+  </ul></li>
+  <li><a href="#image-files-formats" id="toc-image-files-formats" class="nav-link" data-scroll-target="#image-files-formats">Image files formats</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">SciPy</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Disclaimer</strong>: this course is adapted from the notebooks by</p>
+<ul>
+<li><a href="http://alexandre.gramfort.net/">A. Gramfort</a></li>
+<li><a href="https://jrjohansson.github.io/">J. R. Johansson</a></li>
+</ul>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>SciPy is a scientific library that builds upon NumPy. Among others, SciPy deals with:</p>
+<ul>
+<li>Integration (<a href="http://docs.scipy.org/doc/scipy/reference/integrate.html">scipy.integrate</a>)</li>
+<li>Optimization (<a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">scipy.optimize</a>)</li>
+<li>Interpolation (<a href="http://docs.scipy.org/doc/scipy/reference/interpolate.html">scipy.interpolate</a>)</li>
+<li>Fourier Transform (<a href="http://docs.scipy.org/doc/scipy/reference/fftpack.html">scipy.fftpack</a>)</li>
+<li>Signal Processing (<a href="http://docs.scipy.org/doc/scipy/reference/signal.html">scipy.signal</a>)</li>
+<li>Linear Algebra (<a href="http://docs.scipy.org/doc/scipy/reference/linalg.html">scipy.linalg</a>)</li>
+<li><em>Sparse</em> matrices (<a href="http://docs.scipy.org/doc/scipy/reference/sparse.html">scipy.sparse</a>)</li>
+<li>Statistics (<a href="http://docs.scipy.org/doc/scipy/reference/stats.html">scipy.stats</a>)</li>
+<li>Image processing (<a href="http://docs.scipy.org/doc/scipy/reference/ndimage.html">scipy.ndimage</a>)</li>
+<li>IO (input/output) (<a href="http://docs.scipy.org/doc/scipy/reference/io.html">scipy.io</a>)</li>
+</ul>
+<div id="6168bf60" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> linalg</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>References</strong>:</p>
+<ul>
+<li><a href="http://louistiao.me/posts/notebooks/embedding-matplotlib-animations-in-jupyter-as-interactive-javascript-widgets/">Matplotlib Animations / JavaScript Widgets</a> by Louis Tiao</li>
+</ul>
+</section>
+<section id="linear-algebra" class="level2">
+<h2 class="anchored" data-anchor-id="linear-algebra">Linear algebra</h2>
+<p><code>scipy</code> for linear algebra : use <code>linalg</code>. It includes functions for solving linear systems, eigenvalues decomposition, SVD, Gaussian elimination (LU, Cholesky), etc.</p>
+<p><strong>References</strong>:</p>
+<ul>
+<li><a href="http://docs.scipy.org/doc/scipy/reference/linalg.html">Scipy documentation</a></li>
+</ul>
+<section id="solving-linear-systems" class="level3">
+<h3 class="anchored" data-anchor-id="solving-linear-systems">Solving linear systems:</h3>
+<p>Find <span class="math inline">\(x\)</span> such that: <span class="math inline">\(A x = b\)</span> for specified matrix <span class="math inline">\(A\)</span> and vector <span class="math inline">\(b\)</span>.</p>
+<div id="9f72a649" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">12</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]], dtype<span class="op">=</span>np.float64).T</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A, b)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> linalg.solve(A, b)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x, x.shape, b.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[ 1.  0.  3.]
+ [ 4.  5. 12.]
+ [ 7.  8.  9.]] [[1.]
+ [2.]
+ [3.]]
+[[ 0.8       ]
+ [-0.4       ]
+ [ 0.06666667]] (3, 1) (3, 1)</code></pre>
+</div>
+</div>
+<p>Check the result at a given precision (different from ==)</p>
+<div id="7100f825" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>np.allclose(A <span class="op">@</span> x, b, atol<span class="op">=</span><span class="fl">1e-14</span>, rtol<span class="op">=</span><span class="fl">1e-15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>True</code></pre>
+</div>
+</div>
+<p><strong>Remark</strong>: NEVER (or you should really know why) invert a matrix. <strong>ALWAYS</strong> solve linear systems instead!</p>
+<section id="eigenvalues-eigenvectors" class="level4">
+<h4 class="anchored" data-anchor-id="eigenvalues-eigenvectors">Eigenvalues/ Eigenvectors</h4>
+<p><span class="math inline">\(A v_n = \lambda_n v_n\)</span> with <span class="math inline">\(v_n\)</span> the <span class="math inline">\(n\)</span>-th eigen vector and <span class="math inline">\(\lambda_n\)</span> the <span class="math inline">\(n\)</span>-th eigen value. The associated <code>python</code> functions are <code>eigvals</code> and <code>eig</code>:</p>
+<div id="28ec3c6d" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.randn(<span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> A <span class="op">+</span> A.T</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>evals, evecs <span class="op">=</span> linalg.eig(A)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals, <span class="st">"</span><span class="ch">\n</span><span class="st"> ------</span><span class="ch">\n</span><span class="st">"</span>, evecs)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>np.allclose(A, evecs <span class="op">@</span> np.diag(evals) <span class="op">@</span> evecs.T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[ 4.58051232+0.j -1.39711081+0.j -3.30677981+0.j] 
+ ------
+ [[ 0.61121736  0.7599133  -0.22123543]
+ [ 0.16036288 -0.39263507 -0.90560557]
+ [ 0.77504651 -0.5180439   0.36184726]]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>True</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+EXERCISE: Eigenvalues/Eigenvectors
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Verify numerically that the outputs from <code>linalg.eig</code> are indeed approximately eigenvalues and eigenvectors of matrix A above.</p>
+<p><em>Hint</em>: use <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html">Scipy documentation on allclose</a></p>
+</div>
+</div>
+</section>
+<section id="symmetric-matrices" class="level4">
+<h4 class="anchored" data-anchor-id="symmetric-matrices">Symmetric matrices</h4>
+<p>If A is symmetric you <strong>should</strong> use <code>eigvalsh</code> (H for Hermitian) instead: This is more robust and leverages the structures (you know they are real!)</p>
+</section>
+</section>
+<section id="matrix-operations" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-operations">Matrix operations</h3>
+<ul>
+<li><code>linalg.trace(A)</code> # trace</li>
+<li><code>linalg.det(A)</code> # determinant</li>
+<li><code>linalg.inv(A)</code> # Inverse, consider NEVER using it though :)</li>
+</ul>
+</section>
+<section id="norms" class="level3">
+<h3 class="anchored" data-anchor-id="norms">Norms</h3>
+<div id="e8f06acc" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(linalg.norm(A, <span class="bu">ord</span><span class="op">=</span><span class="st">"fro"</span>))  <span class="co"># fro for Frobenius</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((np.<span class="bu">sum</span>(A <span class="op">**</span> <span class="dv">2</span>)) <span class="op">**</span> <span class="fl">0.5</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(linalg.norm(A, <span class="bu">ord</span><span class="op">=</span><span class="dv">2</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((linalg.eigvalsh(A.T <span class="op">@</span> A) <span class="op">**</span> <span class="fl">0.5</span>))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(linalg.norm(A, <span class="bu">ord</span><span class="op">=</span>np.inf))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5.819605177567109
+5.819605177567109
+4.580512322092029
+[1.39711081 3.30677981 4.58051232]
+6.296928948140431</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+EXERCISE: Norms computation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Check numerically what the instruction <code>linalg.norm(A, ord=np.inf)</code> is computing. Double check with the help and a numerical test.</p>
+</div>
+</div>
+<div id="da70d009" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.randn(<span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(linalg.norm(A, <span class="bu">ord</span><span class="op">=</span>np.inf))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3.813296200914195</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="random-generation-distributions-etc." class="level2">
+<h2 class="anchored" data-anchor-id="random-generation-distributions-etc.">Random generation, distributions, etc.</h2>
+<p><strong>References</strong>:</p>
+<ul>
+<li><a href="https://albertcthomas.github.io/good-practices-random-number-generators/">Good practices with numpy random number generators</a> by Albert Thomas</li>
+<li><a href="https://numpy.org/doc/1.18/reference/random/legacy.html#numpy.random.RandomState">Numpy documentation on RandomState</a></li>
+<li><a href="https://github.com/josephsalmon/Random-Widgets">Random Widgets</a>, by Joseph Salmon: Visualization of various popular distributions.</li>
+</ul>
+<div id="049ef392" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="dv">12345</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed)  <span class="co"># can be called without a seed</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>rng.random()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>0.22733602246716966</code></pre>
+</div>
+</div>
+</section>
+<section id="optimization" class="level2">
+<h2 class="anchored" data-anchor-id="optimization">Optimization</h2>
+<p><strong>Goal</strong>: find functions minima or maxima</p>
+<p>References:</p>
+<ul>
+<li><a href="http://scipy-lectures.github.com/advanced/mathematical_optimization/index.html">Scipy Lectures</a> on mathematical optimization.</li>
+</ul>
+<div id="38397e16" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> optimize</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="finding-local-minima" class="level3">
+<h3 class="anchored" data-anchor-id="finding-local-minima">Finding (local!) minima</h3>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">4</span> <span class="op">*</span> x <span class="op">**</span> <span class="dv">3</span> <span class="op">+</span> (x <span class="op">-</span> <span class="dv">2</span>) <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> x <span class="op">**</span> <span class="dv">4</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mf(x):</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>(<span class="dv">4</span> <span class="op">*</span> x <span class="op">**</span> <span class="dv">3</span> <span class="op">+</span> (x <span class="op">-</span> <span class="dv">2</span>) <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> x <span class="op">**</span> <span class="dv">4</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>plt.plot(xs, f(xs))</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="dfabb05d" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="9">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-10-output-1.png" class="img-fluid" width="575"></p>
+</div>
+</div>
+</div>
+<p>Default solver for minimization/maximization: <code>fmin_bfgs</code> (see <a href="https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm">Wikipedia on BFGS</a>)</p>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x_min <span class="op">=</span> optimize.fmin_bfgs(f, x0<span class="op">=-</span><span class="dv">4</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>x_max <span class="op">=</span> optimize.fmin_bfgs(mf, x0<span class="op">=-</span><span class="dv">2</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>x_min2 <span class="op">=</span> optimize.fmin_bfgs(f, x0<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.plot(xs, f(xs))</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x_min, f(x_min), <span class="st">"o"</span>, markersize<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"orange"</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x_min2, f(x_min2), <span class="st">"o"</span>, markersize<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"red"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.plot(x_max, f(x_max), <span class="st">"|"</span>, markersize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c6e1aef6" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="10">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<pre><code>Optimization terminated successfully.
+         Current function value: -3.506641
+         Iterations: 7
+         Function evaluations: 16
+         Gradient evaluations: 8
+Optimization terminated successfully.
+         Current function value: -6.201654
+         Iterations: 5
+         Function evaluations: 12
+         Gradient evaluations: 6
+Optimization terminated successfully.
+         Current function value: 2.804988
+         Iterations: 7
+         Function evaluations: 16
+         Gradient evaluations: 8</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-11-output-2.png" class="img-fluid" width="575"></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+EXERCISE: Basin of attraction
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Draw the points on the curves with two different colors :</p>
+<ul>
+<li>orange: for the points leading to find the left local minima</li>
+<li>red: for the points leading to the right local minima.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="find-the-zeros-of-a-function" class="level3">
+<h3 class="anchored" data-anchor-id="find-the-zeros-of-a-function">Find the zeros of a function</h3>
+<p>Find <span class="math inline">\(x\)</span> such that <span class="math inline">\(f(x) = 0\)</span>, with <code>fsolve</code>.</p>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>omega_c <span class="op">=</span> <span class="fl">3.0</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(omega):</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.tan(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> omega) <span class="op">-</span> omega_c <span class="op">/</span> omega</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="fl">1e-8</span>, <span class="fl">3.2</span>, <span class="dv">1000</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> f(x)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove vertical lines when the function flips signs</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.where(np.<span class="bu">abs</span>(y) <span class="op">&gt;</span> <span class="dv">50</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>x[mask] <span class="op">=</span> y[mask] <span class="op">=</span> np.nan</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="fl">3.3</span>], [<span class="dv">0</span>, <span class="dv">0</span>], <span class="st">"k"</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>optimize.fsolve(f, <span class="fl">0.72</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>optimize.fsolve(f, <span class="fl">1.1</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>optimize.fsolve(f, np.linspace(<span class="fl">0.001</span>, <span class="dv">3</span>, <span class="dv">20</span>))</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>np.unique(np.<span class="bu">round</span>(optimize.fsolve(f, np.linspace(<span class="fl">0.2</span>, <span class="dv">3</span>, <span class="dv">20</span>)), <span class="dv">3</span>))</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>my_zeros <span class="op">=</span> (</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    np.unique((optimize.fsolve(f, np.linspace(<span class="fl">0.2</span>, <span class="dv">3</span>, <span class="dv">20</span>)) <span class="op">*</span> <span class="dv">1000</span>).astype(<span class="bu">int</span>)) <span class="op">/</span> <span class="fl">1000.0</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, label<span class="op">=</span><span class="st">"$f$"</span>)</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="fl">3.3</span>], [<span class="dv">0</span>, <span class="dv">0</span>], <span class="st">"k"</span>)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>plt.plot(my_zeros, np.zeros(my_zeros.shape), <span class="st">"o"</span>, label<span class="op">=</span><span class="st">"$x : f(x)=0$"</span>)</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cd2f75fd" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="11">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-12-output-1.png" class="img-fluid" width="569"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-12-output-2.png" class="img-fluid" width="577"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="parameters-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="parameters-estimation">Parameters estimation</h3>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> curve_fit</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x, a, b, c):</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""f(x) = a exp(-bx) + c."""</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">*</span> np.exp(<span class="op">-</span>b <span class="op">*</span> x) <span class="op">+</span> c</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">50</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> f(x, <span class="fl">2.5</span>, <span class="fl">1.3</span>, <span class="fl">0.5</span>)  <span class="co"># true signal</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>yn <span class="op">=</span> y <span class="op">+</span> <span class="fl">0.2</span> <span class="op">*</span> np.random.randn(<span class="bu">len</span>(x))  <span class="co"># noisy added</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.plot(x, yn, <span class="st">"."</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">"k"</span>, label<span class="op">=</span><span class="st">"$f$"</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>(a, b, c), _ <span class="op">=</span> curve_fit(f, x, yn)</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a,<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, b,<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="afb64001" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="12">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-13-output-1.png" class="img-fluid" width="571"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<pre><code>2.480167786494349 
+ 1.2140808481048568 
+ 0.532692098679626</code></pre>
+</div>
+</div>
+</div>
+<p>Displaying</p>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plt.plot(x, yn, <span class="st">"."</span>, label<span class="op">=</span><span class="st">"data"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">"k"</span>, label<span class="op">=</span><span class="st">"True $f$"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(x, a, b, c), <span class="st">"--k"</span>, label<span class="op">=</span><span class="st">"Estimated $</span><span class="er">\</span><span class="st">hat</span><span class="sc">{f}</span><span class="st">$"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="56748f1d" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="13">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-14-output-1.png" class="img-fluid" width="571"></p>
+</div>
+</div>
+</div>
+<p>For polynomial fitting, one can directly use <code>numpy</code> functionsL</p>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x <span class="op">*</span> np.pi <span class="op">/</span> <span class="fl">2.0</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>line <span class="op">=</span> np.polyfit(x, y, deg<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">"."</span>, label<span class="op">=</span><span class="st">"data"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>plt.plot(x, np.polyval(line, x), <span class="st">"k--"</span>, label<span class="op">=</span><span class="st">"polynomial approximation"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_31131/4158621946.py:3: RankWarning:
+
+Polyfit may be poorly conditioned
+</code></pre>
+</div>
+<div id="4f1f670a" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="14">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-15-output-2.png" class="img-fluid" width="571"></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="interpolation" class="level2">
+<h2 class="anchored" data-anchor-id="interpolation">Interpolation</h2>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.interpolate <span class="im">import</span> interp1d, CubicSpline</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(x)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">100</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>y_meas <span class="op">=</span> f(n) <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(<span class="bu">len</span>(n))  <span class="co"># add noise</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>y_real <span class="op">=</span> f(x)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>linear_interpolation <span class="op">=</span> interp1d(n, y_meas)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>y_interp1 <span class="op">=</span> linear_interpolation(x)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>cubic_interpolation <span class="op">=</span> CubicSpline(n, y_meas)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>y_interp2 <span class="op">=</span> cubic_interpolation(x)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>plt.plot(n, y_meas, <span class="st">"bs"</span>, label<span class="op">=</span><span class="st">"noisy data"</span>)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y_real, <span class="st">"k"</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"true function"</span>)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y_interp1, <span class="st">"r"</span>, label<span class="op">=</span><span class="st">"linear interp"</span>)</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y_interp2, <span class="st">"g"</span>, label<span class="op">=</span><span class="st">"CubicSpline interp"</span>)</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d7a4dc1e" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="15">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-16-output-1.png" class="img-fluid" width="582"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="images" class="level2">
+<h2 class="anchored" data-anchor-id="images">Images</h2>
+<section id="rgb-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="rgb-decomposition">RGB decomposition</h3>
+<p>First, discuss the color decomposition in RGB. The RGB color model is an additive color model[1] in which the red, green and blue primary colors of light are added together in various ways to reproduce a broad array of colors. Hence, each channel (R, G or B) represents a grayscale image, usually coded on [0,1] or [0,255].</p>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> ndimage, datasets</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> datasets.face()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(img), img.dtype, img.ndim, img.shape)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">**</span> <span class="dv">8</span>)  <span class="co"># uint8-&gt; code sur 256 niveau.</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>n_1, n_2, n_3 <span class="op">=</span> img.shape</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(n_1, n_2, n_3)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># True image</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>plt.imshow(img)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c43d25b2" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="16">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<pre><code>&lt;class 'numpy.ndarray'&gt; uint8 3 (768, 1024, 3)
+256
+768 1024 3</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-17-output-2.png" class="img-fluid" width="512"></p>
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>fig.set_size_inches(<span class="dv">7</span>, <span class="fl">4.5</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>n_1, n_2, n_3 <span class="op">=</span> img.shape</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># add subplot titles</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">"Red channel"</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].imshow(img[:, :, <span class="dv">0</span>], cmap<span class="op">=</span>plt.cm.Reds)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">"Pixel values histogram (red channel)"</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].hist(img[:, :, <span class="dv">0</span>].reshape(n_1 <span class="op">*</span> n_2), np.arange(<span class="dv">0</span>, <span class="dv">256</span>))</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].set_title(<span class="st">"Green channel"</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].imshow(img[:, :, <span class="dv">1</span>], cmap<span class="op">=</span>plt.cm.Greens)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].set_title(<span class="st">"Pixel values histogram (green channel)"</span>)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].hist(img[:, :, <span class="dv">1</span>].reshape(n_1 <span class="op">*</span> n_2), np.arange(<span class="dv">0</span>, <span class="dv">256</span>))</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">0</span>].set_title(<span class="st">"Blue channel"</span>)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">0</span>].imshow(img[:, :, <span class="dv">2</span>], cmap<span class="op">=</span>plt.cm.Blues)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">1</span>].set_title(<span class="st">"Pixel values histogram (blue channel)"</span>)</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">1</span>].hist(img[:, :, <span class="dv">2</span>].reshape(n_1 <span class="op">*</span> n_2), np.arange(<span class="dv">0</span>, <span class="dv">256</span>))</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="29aad0fc" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="17">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-18-output-1.png" class="img-fluid" width="596"></p>
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(img.flags)  <span class="co"># cannot edit...</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>img_compressed <span class="op">=</span> img.copy()</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>img_compressed.setflags(write<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(img_compressed.flags)  <span class="co"># can edit now</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>img_compressed[img_compressed <span class="op">&lt;</span> <span class="dv">70</span>] <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>img_compressed[(img_compressed <span class="op">&gt;=</span> <span class="dv">70</span>) <span class="op">&amp;</span> (img_compressed <span class="op">&lt;</span> <span class="dv">110</span>)] <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>img_compressed[(img_compressed <span class="op">&gt;=</span> <span class="dv">110</span>) <span class="op">&amp;</span> (img_compressed <span class="op">&lt;</span> <span class="dv">180</span>)] <span class="op">=</span> <span class="dv">150</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>img_compressed[(img_compressed <span class="op">&gt;=</span> <span class="dv">180</span>)] <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>plt.imshow(img_compressed, cmap<span class="op">=</span>plt.cm.gray)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="43e83d38" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="18">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<pre><code>  C_CONTIGUOUS : True
+  F_CONTIGUOUS : False
+  OWNDATA : False
+  WRITEABLE : False
+  ALIGNED : True
+  WRITEBACKIFCOPY : False
+
+  C_CONTIGUOUS : True
+  F_CONTIGUOUS : False
+  OWNDATA : True
+  WRITEABLE : True
+  ALIGNED : True
+  WRITEBACKIFCOPY : False
+</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-19-output-2.png" class="img-fluid" width="512"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="convert-a-color-image-in-grayscale" class="level3">
+<h3 class="anchored" data-anchor-id="convert-a-color-image-in-grayscale">Convert a color image in grayscale</h3>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.mean(img, axis<span class="op">=</span><span class="dv">2</span>), cmap<span class="op">=</span>plt.cm.gray)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="94a940ac" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="19">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-20-output-1.png" class="img-fluid" width="552"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="changing-colors-in-an-image" class="level3">
+<h3 class="anchored" data-anchor-id="changing-colors-in-an-image">Changing colors in an image</h3>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pooch</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/486px-Flag_of_Brazil.svg.png"</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>name_img <span class="op">=</span> pooch.retrieve(url, known_hash<span class="op">=</span><span class="st">"f0e55d6c9384907aa0629e66dd2133473b9d7467af0f817670e358bded62487f"</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> (<span class="dv">255</span> <span class="op">*</span> plt.imread(name_img)).astype(<span class="bu">int</span>)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> img.copy()</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>plt.imshow(img)</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>fig.set_size_inches(<span class="dv">7</span>, <span class="fl">4.5</span>)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>n_1, n_2, n_3 <span class="op">=</span> img.shape</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].imshow(img[:, :, <span class="dv">0</span>], cmap<span class="op">=</span>plt.cm.Reds)</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">"Red channel"</span>)</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].hist(img[:, :, <span class="dv">0</span>].reshape(n_1 <span class="op">*</span> n_2), np.arange(<span class="dv">0</span>, <span class="dv">256</span>), density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">"Pixel values histogram (red channel)"</span>)</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].imshow(img[:, :, <span class="dv">1</span>], cmap<span class="op">=</span>plt.cm.Greens)</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].set_title(<span class="st">"Green channel"</span>)</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].hist(img[:, :, <span class="dv">1</span>].reshape(n_1 <span class="op">*</span> n_2), np.arange(<span class="dv">0</span>, <span class="dv">256</span>), density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].set_title(<span class="st">"Pixel values histogram (green channel)"</span>)</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">0</span>].imshow(img[:, :, <span class="dv">2</span>], cmap<span class="op">=</span>plt.cm.Blues)</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">0</span>].set_title(<span class="st">"Blue channel"</span>)</span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">1</span>].hist(img[:, :, <span class="dv">2</span>].reshape(n_1 <span class="op">*</span> n_2), np.arange(<span class="dv">0</span>, <span class="dv">256</span>), density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">1</span>].set_title(<span class="st">"Pixel values histogram (Blue channel)"</span>)</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e31fa9e2" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="20">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-21-output-1.png" class="img-fluid" width="575"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-21-output-2.png" class="img-fluid" width="596"></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+EXERCISE: Make the Brazilian italianer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create a version of the Brazilian flag as follows:</p>
+<div id="9dea5525" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="21">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-22-output-1.png" class="img-fluid" width="575"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="rgba" class="level3">
+<h3 class="anchored" data-anchor-id="rgba">RGBA</h3>
+<p>RGBA stands for red (R), green (G), blue (B) and alpha (A). Alpha indicates how the transparency allows an image to be combined over others using alpha compositing, with transparent areas.</p>
+</section>
+<section id="hexadecimal-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="hexadecimal-decomposition">Hexadecimal decomposition</h3>
+<p>Often, colors are represented not with an RGB triplet, say (255, 0, 0), but with a hexadecimal code (say #FF0000). To get a hexadecimal decomposition, transform each 8-bit RGB channel (<em>i.e.,</em> <span class="math inline">\(2^8=256\)</span>) into a 2-digit hexadecimal number (<em>i.e.,</em> <span class="math inline">\(16^2=256\)</span>). This requires letters for representing <span class="math inline">\(10: A, 11: B,\dots, 15: FF\)</span> (see <a href="https://www.rgbtohex.net/" class="uri">https://www.rgbtohex.net/</a> for an online converter)</p>
+</section>
+<section id="cmyk-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="cmyk-decomposition">CMYK decomposition</h3>
+<p>This is rather a subtractive color model, where the primary colors are cyan (C), magenta (M), yellow (Y), and black (B). For a good source to go from RGB to CMYK (and back), see <a href="https://fr.wikipedia.org/wiki/Quadrichromie" class="uri">https://fr.wikipedia.org/wiki/Quadrichromie</a>.</p>
+</section>
+<section id="hsl-hue-saturation-lightness" class="level3">
+<h3 class="anchored" data-anchor-id="hsl-hue-saturation-lightness">HSL (hue, saturation, lightness)</h3>
+<p>XXX TODO.</p>
+<p>Here, you can find a simple online converter for all popular color models: <a href="https://www.myfixguide.com/color-converter/" class="uri">https://www.myfixguide.com/color-converter/</a>.</p>
+</section>
+</section>
+<section id="image-files-formats" class="level2">
+<h2 class="anchored" data-anchor-id="image-files-formats">Image files formats</h2>
+<p><strong>Bitmap formats</strong>: - PNG (raw, uncompressed format, opens with <a href="https://www.gimp.org/">Gimp</a>) - JPG (compressed format) - GIF (compressed, animated format)</p>
+<p><strong>Vector formats</strong>: - PDF (recommended for your documents) - SVG (easily modifiable with <a href="https://inkscape.org/fr/">Inkscape</a>) - EPS - etc.</p>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.linspace(<span class="fl">0.0</span>, <span class="fl">5.0</span>, num<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.linspace(<span class="fl">0.0</span>, <span class="fl">2.0</span>, num<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>y1 <span class="op">=</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> x1) <span class="op">*</span> np.exp(<span class="op">-</span>x1)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> x2)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>plt.plot(x1, y1)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="dv">6</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c82e0237" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="22">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img src="Scipy_files/figure-html/cell-23-output-1.png" class="img-fluid" width="446"></p>
+</div>
+</div>
+</div>
+<p>Then, we can save the figure in various formats:</p>
+<div id="a64af9b1" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>fig1.savefig(<span class="st">"ma_figure_pas_belle.png"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'png'</span>, dpi<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>fig1.savefig(<span class="st">"ma_figure_plus_belle.svg"</span>,<span class="bu">format</span><span class="op">=</span><span class="st">'svg'</span>, dpi<span class="op">=</span><span class="dv">90</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that the images have been saved, we can visualize the difference between the PNG and SVG formats.</p>
+<p>PNG (zoom on hover):</p>
+<div class="zoom-image">
+    <img src="ma_figure_pas_belle.png" alt="Sinc: not nice" width="95%/">
+</div>
+<p>SVG (zoom on hover):</p>
+<div class="zoom-image">
+    <img src="ma_figure_plus_belle.svg" alt="Sinc: not nice" width="95%/">
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Some additional effects to produce the above zoom-on-hover effect can be found here: <a href="https://www.notuxedo.com/effet-de-zoom-image-css/" class="uri">https://www.notuxedo.com/effet-de-zoom-image-css/</a></p>
+</div>
+</div>
+<p><strong>References</strong>:</p>
+<ul>
+<li><p><a href="https://geopandas.org/en/stable/getting_started/introduction.html">Introduction to geopandas</a></p></li>
+<li><p><a href="http://josephsalmon.eu/enseignement/Montpellier/HLMA310/matplotlib_slides.pdf">Course on images/slides</a> by Joseph Salmon</p></li>
+<li><p><a href="http://www.scipy.org">Official SciPy web page</a></p></li>
+<li><p><a href="http://docs.scipy.org/doc/scipy/reference/tutorial/index.html">SciPy User Guide</a></p></li>
+<li><p><a href="http://scipy-lectures.github.io">Scipy lectures</a></p></li>
+<li><p><a href="https://github.com/scipy/scipy/">The SciPy source code</a></p></li>
+</ul>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bbensaid30\.github\.io\/Course-Software-Development-HAX712X\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../Courses/Scientific_Data_Libraries/Numpy.html" class="pagination-link" aria-label="Numpy cheat sheet">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Numpy cheat sheet</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../Courses/Scientific_Data_Libraries/pandas_titanic.html" class="pagination-link" aria-label="Titanic dataset">
+        <span class="nav-page-text">Titanic dataset</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><span class="faux-block">{{&lt; fa brands creative-commons &gt;}} 2025 Bensaid Bilel </span> <span class="faux-block"><a href="https://bbensaid30.github.io/Course-Software-Development-HAX712X/">{{&lt; fa brands github &gt;}} Source Code</a></span></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><span class="faux-block"> Built with <a href="https://quarto.org/">Quarto</a></span></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
