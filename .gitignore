@@ -6,6 +6,9 @@ cache
 site_libs
 
 .~*
+*.csv
+*.geojson
+.~*
 .ipynb_checkpoints
 .*ipynb
 
