@@ -26,45 +26,23 @@ project:
     - Courses/Scientific_Data_Libraries/pandas_titanic.qmd
     - Courses/Scientific_Data_Libraries/pandas_bikes.qmd
     - Courses/Scientific_Data_Libraries/pandas_airparif.qmd
+    - Projects/2023-2024/README.qmd
+    - Projects/2024-2025/README.qmd
+    - Projects/2025-2026/README.qmd
 
 website:
   bread-crumbs: false
   back-to-top-navigation: true
   page-navigation: true # true not working in website
   title: "HAX712X: Software development for data science"
-  #site-url: https://josephsalmon.github.io/HAX712X/
-  #repo-url: https://github.com/josephsalmon/HAX712X
+  #site-url: https://bbensaid30.github.io/Course-Software-Development-HAX712X/
+  #repo-url: https://bbensaid30.github.io/Course-Software-Development-HAX712X/
   #repo-actions: [source, issue]
   search:
     location: navbar
     type: textbox
-  # sidebar:
-  # left:
-  #   contents:
-  #     - section: "Overview"
-  #       contents:
-  #         - href: index.qmd
-  #     - section: "Courses"
-  # contents:
-  #   - href: Courses/Bash/tp.qmd
-  #   - href: Courses/Git/tp.qmd
-  #   - href: Courses/IDE/tp.qmd
-  #   - href: Courses/Venv/tp.qmd
-  #   - href: Courses/CI/tp.qmd
-  #   - href: Courses/Docs/tp.qmd
-  #   - href: Courses/Python-modules/tp.qmd
-  #   - href: Courses/ClassesExceptions/tp.qmd
-  #   - href: Courses/Test/tp.qmd
-  #   - href: Courses/Pandas/tp.qmd
-  #   - href: Courses/Numpy/tp.qmd
-  #   - href: Courses/ScipyNumpy/tp.qmd
-  #   - href: Courses/TimeMemory/tp.qmd
-  # menu: false
   navbar:
     title: "Data Science"
-    # background: primary
-    #logo: https://josephsalmon.eu/img/Flag_of_Occitania.svg
-    #favicon: https://josephsalmon.eu/img/Flag_of_Occitania.svg
     left:
       - href: index.qmd
         text: Home
@@ -72,6 +50,7 @@ website:
       - sidebar:general
       - sidebar:python
       - sidebar:libraries
+      - sidebar:projects
 
   sidebar:
       - id: general
@@ -126,13 +105,18 @@ website:
               - Courses/Scientific_Data_Libraries/pandas_titanic.qmd
               - Courses/Scientific_Data_Libraries/pandas_bikes.qmd
               - Courses/Scientific_Data_Libraries/pandas_airparif.qmd
+      - id: projects
+        title: "Projects"
+        collapse-level: 3
+        contents:
+          - Projects/2023-2024/README.qmd
+          - Projects/2024-2025/README.qmd
+          - Projects/2025-2026/README.qmd
             
   page-footer:
     left: |
       <span class="faux-block">{{< fa brands creative-commons >}} 2025 Bensaid Bilel </span>
       <span class="faux-block"><a href="https://bbensaid30.github.io/Course-Software-Development-HAX712X/">{{< fa brands github >}} Source Code</a></span>
-    # center: |
-    #   <span class="faux-block"><a href="/impressum/index.html">Impressum</a></span>
     right: |
       <span class="faux-block"> Built with <a href="https://quarto.org/">Quarto</a></span>
 
