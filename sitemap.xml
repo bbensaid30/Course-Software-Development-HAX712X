@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/pandas_airparif.html</loc>
-    <lastmod>2025-08-20T20:18:16.748Z</lastmod>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Projects/2025-2026/README.html</loc>
+    <lastmod>2025-08-21T09:55:43.734Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/pandas_titanic.html</loc>
-    <lastmod>2025-08-20T20:14:26.776Z</lastmod>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Projects/2023-2024/README.html</loc>
+    <lastmod>2025-08-21T08:48:16.233Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/Scipy.html</loc>
-    <lastmod>2025-08-20T16:50:37.435Z</lastmod>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/pandas_bikes.html</loc>
+    <lastmod>2025-08-20T20:16:35.209Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/Venv.html</loc>
-    <lastmod>2025-08-20T16:51:46.518Z</lastmod>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/Visualization.html</loc>
+    <lastmod>2025-08-20T15:35:37.319Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/OPP/Docs.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/Numpy.html</loc>
+    <lastmod>2025-08-20T15:41:32.866Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/IDEs/VSCode.html</loc>
+    <lastmod>2025-08-20T17:35:33.565Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/OPP/Classes_Exceptions.html</loc>
     <lastmod>2025-08-19T20:50:16.614Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/OPP/modules.html</loc>
-    <lastmod>2025-08-19T20:50:16.624Z</lastmod>
-  </url>
-  <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Test_Python/Profiling_Debugging.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Test_Python/CI.html</loc>
     <lastmod>2025-08-19T20:50:16.625Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Test_Python/Unit_Test.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Test_Python/TimeMemory.html</loc>
     <lastmod>2025-08-19T20:50:16.625Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Errors.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Workflow.html</loc>
     <lastmod>2025-08-19T20:50:16.607Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Collaborative_PartI.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Collaborative_PartII.html</loc>
+    <lastmod>2025-08-19T20:50:16.607Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Basis_PartII.html</loc>
     <lastmod>2025-08-19T20:50:16.606Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Basis_PartI.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Bash/streams_research.html</loc>
     <lastmod>2025-08-19T20:50:16.606Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Bash/handled_files.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Bash/first_step.html</loc>
     <lastmod>2025-08-19T20:50:16.604Z</lastmod>
   </url>
   <url>
@@ -53,51 +61,55 @@
     <lastmod>2025-08-19T20:50:16.719Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Bash/first_step.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Bash/handled_files.html</loc>
     <lastmod>2025-08-19T20:50:16.604Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Bash/streams_research.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Basis_PartI.html</loc>
     <lastmod>2025-08-19T20:50:16.606Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Basis_PartII.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Collaborative_PartI.html</loc>
     <lastmod>2025-08-19T20:50:16.606Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Collaborative_PartII.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Errors.html</loc>
     <lastmod>2025-08-19T20:50:16.607Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Git/Workflow.html</loc>
-    <lastmod>2025-08-19T20:50:16.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Test_Python/TimeMemory.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Test_Python/Unit_Test.html</loc>
     <lastmod>2025-08-19T20:50:16.625Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Test_Python/CI.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Test_Python/Profiling_Debugging.html</loc>
     <lastmod>2025-08-19T20:50:16.625Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/OPP/Classes_Exceptions.html</loc>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/OPP/modules.html</loc>
+    <lastmod>2025-08-19T20:50:16.624Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/OPP/Docs.html</loc>
     <lastmod>2025-08-19T20:50:16.614Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/IDEs/VSCode.html</loc>
-    <lastmod>2025-08-20T17:35:33.565Z</lastmod>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/Venv.html</loc>
+    <lastmod>2025-08-20T16:51:46.518Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/Numpy.html</loc>
-    <lastmod>2025-08-20T15:41:32.866Z</lastmod>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/Scipy.html</loc>
+    <lastmod>2025-08-20T16:50:37.435Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/Visualization.html</loc>
-    <lastmod>2025-08-20T15:35:37.319Z</lastmod>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/pandas_titanic.html</loc>
+    <lastmod>2025-08-20T20:14:26.776Z</lastmod>
   </url>
   <url>
-    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/pandas_bikes.html</loc>
-    <lastmod>2025-08-20T20:16:35.209Z</lastmod>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Courses/Scientific_Data_Libraries/pandas_airparif.html</loc>
+    <lastmod>2025-08-20T20:18:16.748Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bbensaid30.github.io/Course-Software-Development-HAX712X/Projects/2024-2025/README.html</loc>
+    <lastmod>2025-08-21T10:00:50.504Z</lastmod>
   </url>
 </urlset>
