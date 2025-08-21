@@ -191,4 +191,10 @@ Here's also a recap for the presentation part (slides, oral presentation):
 |**Oral**   |Slides quality and structure                    |10          |
 |           |Clarity / lively presentation / Rhythm / Show   |10          |
 | **Total**·|                                                |20          |
-:  {.striped}
+:  {.striped}w
+
+## Examples
+Here are some links to the Github pages showing what have been done the last year:
+[Group 1](https://github.com/coralieromani/PROJET_2024.git)
+[Group 2](https://github.com/riwahachem/Projet_HAX712X)
+[Group 3](https://github.com/mscaia/PROJ_HAX712X)
