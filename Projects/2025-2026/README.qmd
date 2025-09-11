@@ -7,14 +7,22 @@ number-sections: true
 
 For this course, the grading consists of a long-term project.
 
-You will need to work all along the semester to master it. Please start to work on it as soon as possible. You need to use your GitHub account (see [Git lecture](../../Courses/Git/Basis_PartII.qmd)) as the expected outputs for this course are GitHub repositories.
+You will need to work all along the semester to master it. Please start to work on it as soon as possible. You need to use your GitHub account (see [Git lecture](../../Courses/Git/Basis_PartII.qmd)) as the expected outputs for this course are GitHub repositories. 
 
 
 # Team project:
+It will be mostly a visualization project, hopefully an interactive one, with the creation of an app or website, helping to navigate your work. The project consists of an investigation of an economic, social, ecological or public health subject (of your choice), through the analysis of (public) datasets. Concrete examples could be:
+- sources of energy, see [this webpage](https://www.carbonbrief.org/mapped-how-the-us-generates-electricity/) or [this app](https://globalenergymonitor.org/projects/global-coal-plant-tracker/dashboard/)
+- population/demographic issues, see this [advanced interractive app](https://manpopex.us/)
+- an ecological issue like [this one](https://interactive.carbonbrief.org/can-great-barrier-reef-survive-climate-change/index.html)
+- sncf traffic, ...
+
+Bonus: one can also make predictions (future population in an area, future electric consumption, ...) developping a Machine Learning/Statistical model and presents these predictions in the app/website.  
+
 
 ## Setting and objectives
 
-The **group composition** is available on [Moodle](https://moodle.umontpellier.fr/course/view.php?id=22454).
+The **group composition** will be available soon on [Moodle](https://moodle.umontpellier.fr/course/view.php?id=22454).
 
 
 ::: {.callout-important}
@@ -93,10 +101,11 @@ The main point for this step is to create a `README.qmd` (maximum length: approx
 
 #### General guidelines
 
-The ultimate goal is to provide a:
+The ultimate goal is to provide one of the two outputs:
 
-* a Python module that can be imported with `pip` and contains your work/app
-* a website with `quarto` or with `sphinx` that presents your project. This website should be deployed through GitHubPages. At least one of the pages should contain an interactive element (maps, widgets, etc.).
+* a runnable Python app that illustrates your data and the narration. 
+* a website with `quarto` or with `sphinx` (or others) that presents your project. This website should be deployed through GitHubPages. 
+At least one of the pages should contain an interactive element (maps, widgets, etc.).
 
 A description of the procedure will be needed (imagine you are addressing a user not aware of your package). An example of a project made in 2020, is available at <https://github.com/tanglef/chaoseverywhere>.
 
@@ -129,7 +138,7 @@ A description of the procedure will be needed (imagine you are addressing a user
 #### Dataset(s)
 
 - For reproducibility, the data should be easily available to anyone that want to check your work. 
-Bonus: The data used should be available in a way that the end user does not need to perform a manual download of any kind (use the `pooch` package or variants for instance).
+It is better if the data used should be available in a way that the end user does not need to perform a manual download of any kind (use the `pooch` package or variants for instance).
 
 
 #### Time/memory evaluation
@@ -151,13 +160,13 @@ Here's a recap for the final project (code, app/website):
 
 |General    |Details                                         |Points (/20)|
 |---------  |------------------------------------------------|------------|
-|**Code**   |Problem Resolution                              |8           |
+|**Code**   |Problem Resolution/Narration                    |5           |
 |           |General code quality / readability              |2           |
 |           |Readme/Comments/Pep8                            |1           |
 |           |Unit Tests/CI/Deploy: wheel                     |1           |
 |           |Class (create at least 1 class)                 |1           |
 |           |Reproducibility/Dataset loading                 |1           |
-|           |Graphical aspects: Widgets, clickable map, etc. |2           |
+|           |Graphical aspects: Widgets, clickable map, etc. |5           |
 |           |Time/Memory efficiency                          |1           |
 |           |Documentation                                   |3           |
 | **Total**·|                                                |20          |
@@ -172,3 +181,9 @@ Here's also a recap for the presentation part (slides, oral presentation):
 |           |Clarity / lively presentation / Rhythm / Show   |10          |
 | **Total**·|                                                |20          |
 :  {.striped}
+
+# Examples
+Here are some links to the Github pages showing what have been done the last year:
+[Group 1](https://github.com/coralieromani/PROJET_2024.git)
+[Group 2](https://github.com/riwahachem/Projet_HAX712X)
+[Group 3](https://github.com/mscaia/PROJ_HAX712X)
