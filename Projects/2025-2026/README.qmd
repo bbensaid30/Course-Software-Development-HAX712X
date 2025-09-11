@@ -19,6 +19,14 @@ It will be mostly a visualization project, hopefully an interactive one, with th
 
 Bonus: one can also make predictions (future population in an area, future electric consumption, ...) developping a Machine Learning/Statistical model and presents these predictions in the app/website.  
 
+## Some source of datasets:
+
+Here some dataset website are listed:
+- [openstreetmap](https://www.openstreetmap.fr/donnees/) (api)
+- [openrouteservice](https://api.openrouteservice.org/) (api)
+- [gapminder](https://www.gapminder.org/data/)
+- [USenergyadmin](https://www.eia.gov/electricity/)
+- [Kaggle](https://www.kaggle.com/)
 
 ## Setting and objectives
 
