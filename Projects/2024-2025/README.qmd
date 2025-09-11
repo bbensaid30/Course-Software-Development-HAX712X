@@ -24,7 +24,7 @@ The project consists of an investigation of bike traffic in Montpellier, through
 
 
 
-It will be mostly a visualization project, hopefully an interactive one, with the creation of a website (as for the personal project), helping to navigate your work. The study could focus at least on the following time resolution: last month, last year and all years.
+It will be mostly a visualization project, hopefully an interactive one, with the creation of a website, helping to navigate your work. The study could focus at least on the following time resolution: last month, last year and all years.
 Among the output expected is
 
 1. a video such as this one [NYC CitiBike](https://www.youtube.com/watch?v=SKJ6BsycvJA):
@@ -36,8 +36,3 @@ Among the output expected is
 
 ![](blog-homepage-hero-image-key-to-effective-road-management__1000x800.webp){width="75%" fig-align="center"}
 
-## Examples
-Here are some links to the Github pages showing what have been done the last year:
-[Group 1](https://github.com/coralieromani/PROJET_2024.git)
-[Group 2](https://github.com/riwahachem/Projet_HAX712X)
-[Group 3](https://github.com/mscaia/PROJ_HAX712X)
