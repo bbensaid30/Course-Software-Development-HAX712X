@@ -12,6 +12,7 @@ You will need to work all along the semester to master it. Please start to work 
 
 # Team project:
 It will be mostly a visualization project, hopefully an interactive one, with the creation of an app or website, helping to navigate your work. The project consists of an investigation of an economic, social, ecological or public health subject (of your choice), through the analysis of (public) datasets. Concrete examples could be:
+
 - sources of energy, see [this webpage](https://www.carbonbrief.org/mapped-how-the-us-generates-electricity/) or [this app](https://globalenergymonitor.org/projects/global-coal-plant-tracker/dashboard/)
 - population/demographic issues, see this [advanced interractive app](https://manpopex.us/)
 - an ecological issue like [this one](https://interactive.carbonbrief.org/can-great-barrier-reef-survive-climate-change/index.html)
@@ -22,6 +23,7 @@ Bonus: one can also make predictions (future population in an area, future elect
 ## Some source of datasets:
 
 Here some dataset website are listed:
+
 - [openstreetmap](https://www.openstreetmap.fr/donnees/) (api)
 - [openrouteservice](https://api.openrouteservice.org/) (api)
 - [gapminder](https://www.gapminder.org/data/)
@@ -30,7 +32,7 @@ Here some dataset website are listed:
 
 ## Setting and objectives
 
-The **group composition** will be available soon on [Moodle](https://moodle.umontpellier.fr/course/view.php?id=22454).
+The **group composition** is available on [Moodle](https://moodle.umontpellier.fr/course/view.php?id=22454).
 
 
 ::: {.callout-important}
@@ -38,24 +40,19 @@ The **group composition** will be available soon on [Moodle](https://moodle.umon
 The project repository **must show a balanced contribution between group members** and intra-group grade variation could be made to reflect issues on the intra-group workload balance. Group issues must be reported early to the teaching team.
 :::
 
-The project consists of an investigation of 
-
-It will be mostly a visualization project, hopefully an interactive one, with the creation of (interractive) maps/histograms/kde or a website (your choice), helping to navigate your work.
-
-
 ## Timing
 
 - **Mid-term** project snapshot: This part consists of starting the **group project**, explaining the main question of interest chosen to investigate. You should show preliminary work and organization of the workload, git first steps for the group project, etc. See details below @sec-midterm. This part corresponds to **25% of the final grade**. The due date is **October 25 (23:59)**.
 
-- **The GitHub repository** with the **presentations slides** should be completed before **Tuesday 10 December (23:59)**. This part corresponds to **40% of the final grade**.  <span style="color:red;">Nothing pushed after the deadline will be taken into account.</span>
+- **The GitHub repository** with the **presentations slides** should be completed before **Wednesday 10 December (23:59)**. This part corresponds to **40% of the final grade**.  <span style="color:red;">Nothing pushed after the deadline will be taken into account.</span>
 
-- The oral presentation (15mn + 5mn questions)  **December 13 (8:00)** (room: SC36.01). This part corresponds to **35% of the final grade**.
+- The oral presentation (15mn + 5mn questions)  **December 12 (8:00)** (SC 36.04). This part corresponds to **35% of the final grade**.
 
 ### Mid-term project snapshot {#sec-midterm}
 
 
 Please provide the URL of the group repository and the group composition (**do not forget your student number**) in the following survey 
-<span style="color:red;">TODO_TODO_TODO_TODO_TODO_TODO_TODO_TODO_TODO_TODO_TODO_TODO_.</span>.
+<span style="color:red;">.</span>.
 
 
 The main point for this step is to create a `README.qmd` (maximum length: approximately 4 pages) in a `roadmap` directory at the root of your project. We will provide you feedback in the form of *GitHub issues* on your project repository. Your file should give the outline of the project with the following ingredients:
@@ -192,6 +189,7 @@ Here's also a recap for the presentation part (slides, oral presentation):
 
 # Examples
 Here are some links to the Github pages showing what have been done the last year:
+
 [Group 1](https://github.com/coralieromani/PROJET_2024.git)
 [Group 2](https://github.com/riwahachem/Projet_HAX712X)
 [Group 3](https://github.com/mscaia/PROJ_HAX712X)
