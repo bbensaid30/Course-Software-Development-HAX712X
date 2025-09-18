@@ -82,7 +82,7 @@ If you return to the main page on Github, you can see that:
 
 Finally, you can retrieve the last changes as well as your colleague with ```git pull```.
 
-<span style="color:red">Ressource</span>: [Tutorial on branch](https://www.toolsqa.com/git/branch-in-git/)
+<span style="color:red">Ressource</span>: [Tutorial on branch and tag](https://www.toolsqa.com/git/branch-in-git/)
 
 ## Philosophy of commit: commit early, commit often
 
