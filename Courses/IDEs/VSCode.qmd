@@ -101,7 +101,7 @@ This part is dedicated to setting up `VSCode` to use it as a Python IDE. You sho
 
     From within VSCode, select a Python 3 interpreter by opening the Command Palette (`Ctrl+Shift+P`), start typing the `Python: Select Interpreter` command to search, then select the command. You can also use the `Select Python Environment` option on the Status Bar if available.
 
-3. Next, you have to learn how to debug a simple Python script, see the [VSCode help on debugging](https://code.visualstudio.com/docs/python/debuggings) for that.
+3. Next, you have to learn how to debug a simple Python script, see the [VSCode help on debugging](https://code.visualstudio.com/docs/python/debugging) for that.
 :::
 
 ## Recommended extensions for VS Code
