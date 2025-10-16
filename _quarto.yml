@@ -23,9 +23,9 @@ project:
     - Courses/Scientific_Data_Libraries/Numpy.qmd
     - Courses/Scientific_Data_Libraries/Scipy.qmd
     - Courses/Scientific_Data_Libraries/Visualization.qmd
-    - Courses/Scientific_Data_Libraries/pandas_titanic.qmd
-    - Courses/Scientific_Data_Libraries/pandas_bikes.qmd
-    - Courses/Scientific_Data_Libraries/pandas_airparif.qmd
+    #- Courses/Scientific_Data_Libraries/pandas_titanic.qmd
+    #- Courses/Scientific_Data_Libraries/pandas_bikes.qmd
+    #- Courses/Scientific_Data_Libraries/pandas_airparif.qmd
     - Projects/2023-2024/README.qmd
     - Projects/2024-2025/README.qmd
     - Projects/2025-2026/README.qmd
@@ -102,8 +102,8 @@ website:
               - Courses/Scientific_Data_Libraries/Scipy.qmd
           - section: "Pandas"
             contents:
-              - Courses/Scientific_Data_Libraries/pandas_titanic.qmd
-              - Courses/Scientific_Data_Libraries/pandas_bikes.qmd
+              #- Courses/Scientific_Data_Libraries/pandas_titanic.qmd
+              #- Courses/Scientific_Data_Libraries/pandas_bikes.qmd
               - Courses/Scientific_Data_Libraries/pandas_airparif.qmd
       - id: projects
         title: "Projects"
