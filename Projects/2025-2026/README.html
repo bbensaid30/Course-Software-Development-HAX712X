@@ -381,12 +381,12 @@ No free-rider tolerated
 <ul>
 <li><p><strong>Mid-term</strong> project snapshot: This part consists of starting the <strong>group project</strong>, explaining the main question of interest chosen to investigate. You should show preliminary work and organization of the workload, git first steps for the group project, etc. See details below <a href="#sec-midterm" class="quarto-xref">Section&nbsp;2.3.1</a>. This part corresponds to <strong>25% of the final grade</strong>. The due date is <strong>October 25 (23:59)</strong>.</p></li>
 <li><p><strong>The GitHub repository</strong> with the <strong>presentations slides</strong> should be completed before <strong>Wednesday 10 December (23:59)</strong>. This part corresponds to <strong>40% of the final grade</strong>. <span style="color:red;">Nothing pushed after the deadline will be taken into account.</span></p></li>
-<li><p>The oral presentation (15mn + 5mn questions) <strong>December 12 (8:00)</strong> (SC 36.04). This part corresponds to <strong>35% of the final grade</strong>.</p></li>
+<li><p>The oral presentation (15mn + 5mn questions) <strong>December 08 (8:00)</strong> (SC 36.04). This part corresponds to <strong>35% of the final grade</strong>.</p></li>
 </ul>
 <section id="sec-midterm" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="sec-midterm"><span class="header-section-number">2.3.1</span> Mid-term project snapshot</h3>
-<p>Please provide the URL of the group repository and the group composition (<strong>do not forget your student number</strong>) in the following survey <span style="color:red;">.</span>.</p>
-<p>The main point for this step is to create a <code>README.qmd</code> (maximum length: approximately 4 pages) in a <code>roadmap</code> directory at the root of your project. We will provide you feedback in the form of <em>GitHub issues</em> on your project repository. Your file should give the outline of the project with the following ingredients:</p>
+<p>Please provide the URL of the group repository and the group composition (<strong>do not forget your student number</strong>) in Moodle.</p>
+<p>The main point for this step is to create a <code>README.qmd</code> in a <code>roadmap</code> directory at the root of your project. Your file should give the outline of the project with the following ingredients:</p>
 <ul class="task-list">
 <li><p><label><input type="checkbox">You have to choose a name for your project. Hereafter, it is denoted by <code>my_module_name</code>.</label></p></li>
 <li><p><label><input type="checkbox">description of a minimum viable project, showing the architecture (website, files, classes, etc.). It does not have to be functional at this stage but must have the main files needed, details of the coding pipeline, choice of the packages/technologies used, etc.</label></p></li>
@@ -478,7 +478,7 @@ No free-rider tolerated
 <p>The ultimate goal is to provide one of the two outputs:</p>
 <ul>
 <li>a runnable Python app that illustrates your data and the narration.</li>
-<li>a website with <code>quarto</code> or with <code>sphinx</code> (or others) that presents your project. This website should be deployed through GitHubPages. At least one of the pages should contain an interactive element (maps, widgets, etc.).</li>
+<li>a website with <code>quarto</code> (or other libraries) that presents your project. This website should be deployed through GitHubPages. At least one of the pages should contain an interactive element (maps, widgets, etc.).</li>
 </ul>
 <p>A description of the procedure will be needed (imagine you are addressing a user not aware of your package). An example of a project made in 2020, is available at <a href="https://github.com/tanglef/chaoseverywhere" class="uri">https://github.com/tanglef/chaoseverywhere</a>.</p>
 </section>
@@ -527,14 +527,14 @@ No free-rider tolerated
 <h4 data-number="2.3.2.7" class="anchored" data-anchor-id="documentation"><span class="header-section-number">2.3.2.7</span> Documentation</h4>
 <ul>
 <li><p>Docstrings should be populated for every <code>python</code> class and function.</p></li>
-<li><p>Bonus points will be given if you create an API documentation using <code>sphinx</code> for instance.</p></li>
+<li><p>You should create an API documentation using <code>sphinx</code> for instance.</p></li>
 </ul>
 </section>
 <section id="test-and-ci" class="level4" data-number="2.3.2.8">
 <h4 data-number="2.3.2.8" class="anchored" data-anchor-id="test-and-ci"><span class="header-section-number">2.3.2.8</span> Test and CI</h4>
 <ul>
 <li>Provide unitary tests to check that the function you proposed satisfies the requirement you target.</li>
-<li>Implement a Continuous Integration solution with GitHub that runs your unitary test at each commit.</li>
+<li>Bonus point will be given if you implement a Continuous Integration solution with GitHub that runs your unitary test at each commit.</li>
 </ul>
 <p>Here’s a recap for the final project (code, app/website):</p>
 <table class="table-striped caption-top table">
@@ -554,56 +554,59 @@ No free-rider tolerated
 <tr class="odd">
 <td><strong>Code</strong></td>
 <td>Problem Resolution/Narration</td>
-<td>5</td>
+<td>3</td>
 </tr>
 <tr class="even">
 <td></td>
-<td>General code quality / readability</td>
+<td>Readme/Installation</td>
 <td>2</td>
 </tr>
 <tr class="odd">
 <td></td>
-<td>Readme/Comments/Pep8</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Unit Tests/CI/Deploy: wheel</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Class (create at least 1 class)</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Reproducibility/Dataset loading</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Graphical aspects: Widgets, clickable map, etc.</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Time/Memory efficiency</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Documentation</td>
+<td>Unit Tests</td>
 <td>3</td>
 </tr>
 <tr class="even">
+<td></td>
+<td>Class (create at least 1 class)</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Code quality/Organization</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Graphical aspects: Widgets, clickable map, etc.</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Git branches</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Documentation</td>
+<td>2</td>
+</tr>
+<tr class="odd">
 <td><strong>Total</strong>·</td>
 <td></td>
 <td>20</td>
 </tr>
 </tbody>
 </table>
-<p>Here’s also a recap for the presentation part (slides, oral presentation):</p>
+<p>Bonus will be given for the following reasons:</p>
+<ul>
+<li>Continuous integration with Github</li>
+<li>A code very object-oriented (inheritance, abstraction, …)</li>
+<li>Automatic loading of dataset (with <code>pooch</code> for instance)</li>
+<li>Time/Memory efficiency assessment</li>
+<li>Originality</li>
+</ul>
+<p>Here’s also a short recap for the presentation part (slides, oral presentation):</p>
 <table class="table-striped caption-top table">
 <colgroup>
 <col style="width: 13%">
